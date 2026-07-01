@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-navy-900 font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-bold tracking-tight text-navy-800;
+  }
+}
+
+@layer components {
+  /* ---- Buttons (every variant carries a visible stroke + lift on hover) ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border px-5 py-3 text-sm font-semibold
+           transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  /* Solid-colour buttons carry a white stroke so they pop on coloured/dark sections */
+  .btn-orange {
+    @apply border-white/80 bg-brand-orange text-white shadow-sm hover:bg-brand-orange-dark hover:border-white focus:ring-brand-orange;
+  }
+  .btn-royal {
+    @apply border-white/80 bg-brand-royal text-white shadow-sm hover:bg-brand-royal-dark hover:border-white focus:ring-brand-royal;
+  }
+  .btn-navy {
+    @apply border-white/80 bg-navy-800 text-white shadow-sm hover:bg-navy-900 hover:border-white focus:ring-navy-700;
+  }
+  /* royal-blue outline — used for the hero "Explore" CTA (translucent fill → white stroke) */
+  .btn-outline-royal {
+    @apply border-white/80 bg-brand-royal/10 text-white hover:bg-brand-royal hover:border-white focus:ring-brand-royal;
+  }
+  .btn-outline-light {
+    @apply border-white/55 bg-white/5 text-white hover:bg-white/15 focus:ring-white/50;
+  }
+  .btn-outline-navy {
+    @apply border-navy-300 bg-white text-navy-800 hover:border-navy-500 hover:bg-navy-50 focus:ring-navy-300;
+  }
+
+  /* ---- Eyebrow / section heading accent ---- */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-navy-700;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: '';
+    @apply h-px w-8 bg-brand-orange;
+  }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply rounded-xl border border-line bg-white shadow-card transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 border-navy-200 shadow-card-hover;
+  }
+
+  /* ---- Section spacing (8-pt rhythm: 64 / 96 px) ---- */
+  .section {
+    @apply py-16 md:py-24;
+  }
+  .section-tight {
+    @apply py-12 md:py-16;
+  }
+  /* breathing room between the last section and the footer */
+  .before-footer {
+    @apply pb-16 md:pb-24;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* hide scrollbar for horizontal carousels */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
