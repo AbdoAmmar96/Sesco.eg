@@ -8,6 +8,13 @@ import ProductTile from './ProductTile'
 import Carousel from './Carousel'
 import Reveal from './Reveal'
 
+// Real product catalogs (PDF) served from /public/catalogs, keyed by category
+// slug. A slug without an entry falls back to the placeholder download.
+const CATALOGS = {
+  'fire-fighting': '/catalogs/fire-fighting-catalogue.pdf',
+  'water-network': '/catalogs/water-network-catalogue.pdf',
+}
+
 function matchesFilter(group, filter) {
   if (/^all/i.test(filter)) return true
   const term = filter.toLowerCase().replace(/s$/, '')
@@ -18,6 +25,10 @@ function matchesFilter(group, filter) {
 export default function ProductCategoryPage({ category, data, slug }) {
   const [active, setActive] = useState(data.filters[0])
   const [query, setQuery] = useState('')
+
+  // Real PDF for this category (if any), used by the Download Catalog buttons.
+  const catalogUrl = CATALOGS[slug] || '#'
+  const catalogName = `SES ${category.name} Catalog.pdf`
 
   const visibleGroups = useMemo(() => {
     let groups = data.groups.filter((g) => matchesFilter(g, active))
@@ -47,7 +58,7 @@ export default function ProductCategoryPage({ category, data, slug }) {
             <Link to="/contact" className="btn btn-orange">
               Request a Quotation <ArrowRight className="h-4 w-4" />
             </Link>
-            <button type="button" onClick={() => triggerDownload('#', `${category.name} Catalog`)} className="btn btn-navy">
+            <button type="button" onClick={() => triggerDownload(catalogUrl, catalogName)} className="btn btn-navy">
               Download Catalog <Download className="h-4 w-4" />
             </button>
           </>
@@ -150,7 +161,8 @@ export default function ProductCategoryPage({ category, data, slug }) {
                 title={`${category.name} Catalog`}
                 desc="Complete product catalog with technical specs."
                 link="Download Catalog (PDF)"
-                file={`${category.name} Catalog`}
+                href={catalogUrl}
+                file={catalogName}
               />
               <CatalogItem
                 title="Technical Data Sheets"
@@ -193,7 +205,7 @@ export default function ProductCategoryPage({ category, data, slug }) {
   )
 }
 
-function CatalogItem({ title, desc, link, file }) {
+function CatalogItem({ title, desc, link, file, href = '#' }) {
   return (
     <div className="flex items-start gap-3">
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600">
@@ -204,7 +216,7 @@ function CatalogItem({ title, desc, link, file }) {
         <p className="mt-0.5 text-xs text-navy-500">{desc}</p>
         <button
           type="button"
-          onClick={() => triggerDownload('#', file || title)}
+          onClick={() => triggerDownload(href, file || title)}
           className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-royal transition-all hover:gap-2.5"
         >
           {link} <Download className="h-3.5 w-3.5" />
