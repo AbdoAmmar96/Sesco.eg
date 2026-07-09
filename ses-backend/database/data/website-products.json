@@ -1,0 +1,505 @@
+{
+  "fire-fighting": {
+    "filters": [
+      "All Products"
+    ],
+    "groups": [
+      {
+        "n": 1,
+        "title": "Fire Pump Sets",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Fire Pump Sets",
+            "icon": "pump"
+          }
+        ]
+      },
+      {
+        "n": 2,
+        "title": "Sprinkler Systems",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Upright Sprinkler",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Pendent Sprinkler",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Sidewall Sprinkler",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Concealed Sprinkler",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Flexible Sprinkler Hose",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Sprinkler Guard",
+            "icon": "sprinkler"
+          },
+          {
+            "name": "Escutcheon",
+            "icon": "box"
+          }
+        ]
+      },
+      {
+        "n": 3,
+        "title": "Fire Fighting Valves & Control",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Alarm Check Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Deluge Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Pre-Action Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Zone Control Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Test And Drain Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Water Motor Gong",
+            "icon": "gauge"
+          },
+          {
+            "name": "OS&Y Valve Flanged",
+            "icon": "coupling"
+          }
+        ]
+      },
+      {
+        "n": 4,
+        "title": "Supervision Devices",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Flow Switch",
+            "icon": "gauge"
+          },
+          {
+            "name": "Tamper Switch",
+            "icon": "gauge"
+          },
+          {
+            "name": "Pressure Switch",
+            "icon": "gauge"
+          }
+        ]
+      },
+      {
+        "n": 5,
+        "title": "Hydrant Systems",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Pillar Hydrant",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Wet Barrel Hydrant",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Dry Barrel Hydrant",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Underground Hydrant",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Hydrant Valve",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Hydrant Cap",
+            "icon": "hydrant"
+          },
+          {
+            "name": "Hydrant Wrench",
+            "icon": "hydrant"
+          }
+        ]
+      },
+      {
+        "n": 6,
+        "title": "Fire Cabinets & Hose Systems",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Fire Hose Cabinet",
+            "icon": "cabinet"
+          },
+          {
+            "name": "Hose Reel",
+            "icon": "reel"
+          },
+          {
+            "name": "Fire Hose",
+            "icon": "reel"
+          },
+          {
+            "name": "Landing Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Angle Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Branch Pipe",
+            "icon": "droplets"
+          },
+          {
+            "name": "Nozzle",
+            "icon": "droplets"
+          },
+          {
+            "name": "Hose Rack",
+            "icon": "reel"
+          },
+          {
+            "name": "Single Fire Hose Cabinet FHC-Class1&2",
+            "icon": "cabinet"
+          }
+        ]
+      },
+      {
+        "n": 7,
+        "title": "Breeching & Fire Department Connections",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Breeching Inlet",
+            "icon": "coupling"
+          },
+          {
+            "name": "Fire Department Connection",
+            "icon": "coupling"
+          },
+          {
+            "name": "Inlet Valve",
+            "icon": "coupling"
+          },
+          {
+            "name": "Caps",
+            "icon": "box"
+          },
+          {
+            "name": "Chains",
+            "icon": "box"
+          },
+          {
+            "name": "Breeching Connection",
+            "icon": "coupling"
+          }
+        ]
+      },
+      {
+        "n": 8,
+        "title": "Pipes & Fittings",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Steel Pipe",
+            "icon": "pipe"
+          },
+          {
+            "name": "CPVC Pipe",
+            "icon": "pipe"
+          },
+          {
+            "name": "HDPE Pipe",
+            "icon": "pipe"
+          },
+          {
+            "name": "Grooved Fittings",
+            "icon": "coupling"
+          },
+          {
+            "name": "Threaded Fittings",
+            "icon": "coupling"
+          },
+          {
+            "name": "Flanged Fittings",
+            "icon": "coupling"
+          },
+          {
+            "name": "Welded Fittings",
+            "icon": "coupling"
+          },
+          {
+            "name": "Seamless Pipes",
+            "icon": "pipe"
+          },
+          {
+            "name": "Threaded Fitting",
+            "icon": "coupling"
+          }
+        ]
+      },
+      {
+        "n": 9,
+        "title": "Gases & Special Suppression Systems",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "FM-200",
+            "icon": "spray"
+          },
+          {
+            "name": "CO2 Systems",
+            "icon": "spray"
+          },
+          {
+            "name": "Foam Systems",
+            "icon": "spray"
+          },
+          {
+            "name": "Kitchen Hood Suppression",
+            "icon": "flame"
+          },
+          {
+            "name": "Aerosol system",
+            "icon": "spray"
+          }
+        ]
+      }
+    ],
+    "featured": [
+      {
+        "name": "Upright sprinkler",
+        "spec": "",
+        "icon": "sprinkler",
+        "image": "/images/p-upright-sprinkler.jpg"
+      },
+      {
+        "name": "OS&Y Valve Flanged",
+        "spec": "",
+        "icon": "coupling",
+        "image": "/images/p-osy-valve-flanged.jpg"
+      },
+      {
+        "name": "Flow switch",
+        "spec": "",
+        "icon": "gauge",
+        "image": "/images/p-flow-switch.jpg"
+      },
+      {
+        "name": "dry barrel hydrant",
+        "spec": "",
+        "icon": "hydrant",
+        "image": "/images/p-dry-barrel-hydrant.jpg"
+      },
+      {
+        "name": "Single Fire Hose Cabinet FHC-Class1&2",
+        "spec": "",
+        "icon": "cabinet",
+        "image": "/images/p-single-fire-hose-cabinet-fhc-class12.jpg"
+      },
+      {
+        "name": "Breeching Connection",
+        "spec": "",
+        "icon": "coupling",
+        "image": "/images/p-breeching-connection.jpg"
+      },
+      {
+        "name": "Seamless Pipes",
+        "spec": "",
+        "icon": "pipe",
+        "image": "/images/p-seamless-pipes.jpg"
+      },
+      {
+        "name": "Threaded Fitting",
+        "spec": "",
+        "icon": "coupling",
+        "image": "/images/p-threaded-fitting.jpg"
+      },
+      {
+        "name": "FM-200",
+        "spec": "",
+        "icon": "spray",
+        "image": "/images/p-fm-200.jpg"
+      },
+      {
+        "name": "CO2 Systems",
+        "spec": "",
+        "icon": "spray",
+        "image": "/images/p-co2-systems.jpg"
+      },
+      {
+        "name": "Foam Systems",
+        "spec": "",
+        "icon": "spray",
+        "image": "/images/p-foam-systems.jpg"
+      },
+      {
+        "name": "Kitchen Hood Suppression",
+        "spec": "",
+        "icon": "flame",
+        "image": "/images/p-kitchen-hood-suppression.jpg"
+      },
+      {
+        "name": "Aerosol system",
+        "spec": "",
+        "icon": "spray",
+        "image": "/images/p-aerosol-system.jpg"
+      }
+    ]
+  },
+  "fire-alarm": {
+    "filters": [
+      "All Products"
+    ],
+    "groups": [
+      {
+        "n": 1,
+        "title": "Fire Alarm Systems",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Fire Alarm Systems",
+            "icon": "bell"
+          },
+          {
+            "name": "Products To Prepare Documents For",
+            "icon": "box"
+          }
+        ]
+      }
+    ],
+    "featured": []
+  },
+  "water-network": {
+    "filters": [
+      "All Products"
+    ],
+    "groups": [
+      {
+        "n": 1,
+        "title": "Isolation Valves",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Gate Valve",
+            "icon": "valve"
+          }
+        ]
+      },
+      {
+        "n": 2,
+        "title": "Check Valves",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Swing Check Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Wafer Check Valve",
+            "icon": "valve"
+          },
+          {
+            "name": "Dual Plate Check Valve",
+            "icon": "valve"
+          }
+        ]
+      },
+      {
+        "n": 3,
+        "title": "Air Valves",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Double-Ball Air Release Valve",
+            "icon": "gauge"
+          }
+        ]
+      },
+      {
+        "n": 4,
+        "title": "Special Valves",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Float Valve",
+            "icon": "valve"
+          }
+        ]
+      },
+      {
+        "n": 5,
+        "title": "Strainers",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Y-Strainer",
+            "icon": "grid"
+          },
+          {
+            "name": "Basket Strainer",
+            "icon": "grid"
+          }
+        ]
+      },
+      {
+        "n": 6,
+        "title": "Manhole Covers",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Manhole Covers",
+            "icon": "cover"
+          }
+        ]
+      },
+      {
+        "n": 7,
+        "title": "Ductile Iron Fittings",
+        "desc": "",
+        "cta": "Request a Quotation",
+        "items": [
+          {
+            "name": "Ductile Iron Fittings",
+            "icon": "coupling"
+          }
+        ]
+      }
+    ],
+    "featured": []
+  }
+}

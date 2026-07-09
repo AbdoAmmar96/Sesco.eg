@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             ContentSeeder::class,
+            // Overrides the product groups/featured with the client's real
+            // catalogue data extracted from "Website Products.xlsx".
+            WebsiteProductsSeeder::class,
         ]);
     }
 }
