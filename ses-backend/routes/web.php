@@ -15,7 +15,8 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('admin.login'));
+// Serve the React SPA (its built index.html lives in public/) at the site root.
+Route::get('/', fn () => response()->file(public_path('index.html')));
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Auth
@@ -48,3 +49,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
     });
 });
+
+// SPA fallback: any route not matched above (and not an /api or asset request)
+// returns the React app so React Router can handle client-side routing.
+Route::fallback(fn () => response()->file(public_path('index.html')));
