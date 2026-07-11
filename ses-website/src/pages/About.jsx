@@ -13,7 +13,7 @@ export default function About() {
   return (
     <>
       <PageHero
-        breadcrumb={[{ label: 'About Us' }]}
+        breadcrumb={[{ label: 'About us' }]}
         title={hero.title || 'About SES Trading & Industries'}
         subtitle={hero.subtitle || 'Integrated engineering solutions for Fire Fighting, Fire Alarm, MEP, Water Networks, Testing, Commissioning and Maintenance across Egypt.'}
         bgImage="/images/hero-about.jpg"

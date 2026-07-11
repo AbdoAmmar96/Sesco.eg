@@ -52,7 +52,7 @@ export default function CTABanner({
                 <p className="mt-1 max-w-xl text-sm text-white/70">{text}</p>
               </div>
             </div>
-            <div className="flex shrink-0 flex-wrap gap-3">
+            <div className="grid w-full shrink-0 grid-cols-2 gap-3 sm:flex sm:w-auto sm:flex-wrap">
               {list.map((b) =>
                 b.download ? (
                   <button

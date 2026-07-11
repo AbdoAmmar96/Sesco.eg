@@ -5,7 +5,7 @@ import { useContent } from '../context/ContentContext'
 
 const quickLinks = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
+  { to: '/about', label: 'About us' },
   { to: '/services', label: 'Services' },
   { to: '/products', label: 'Products' },
   { to: '/projects', label: 'Projects' },
@@ -19,9 +19,9 @@ export default function Footer() {
   return (
     <footer className="bg-navy-800 text-white/80">
       <div className="container py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand */}
-          <div className="lg:col-span-4">
+          <div className="col-span-2 lg:col-span-4">
             <Logo variant="light" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
               {company.intro}
@@ -107,9 +107,14 @@ export default function Footer() {
             <span className="hidden text-white/20 md:inline">|</span>
             <p className="text-white/45">
               ©&nbsp;{year}{' '}
-              <span className="font-semibold text-white/60">
-                Business Partner for Information Technology
-              </span>
+              <a
+                href="https://bp-eg.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-white/60 transition-colors hover:text-brand-orange"
+              >
+                Business Partner
+              </a>
               . All rights reserved.
             </p>
           </div>

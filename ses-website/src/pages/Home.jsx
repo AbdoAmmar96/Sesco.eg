@@ -71,7 +71,7 @@ export default function Home() {
               {hero.subtitle ||
                 'SES Trading & Industries delivers end-to-end engineered solutions in Fire Protection, Fire Alarm and Water Networks. Built for safety. Designed for reliability.'}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
               <Link to="/products" className="btn btn-royal">
                 <LayoutGrid className="h-4 w-4" /> Explore Solutions
               </Link>

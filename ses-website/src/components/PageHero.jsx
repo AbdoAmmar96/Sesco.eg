@@ -70,7 +70,7 @@ export default function PageHero({
           </p>
         )}
 
-        {buttons && <div className={`mt-8 flex flex-wrap gap-3 ${align === 'center' ? 'justify-center' : ''}`}>{buttons}</div>}
+        {buttons && <div className={`mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap ${align === 'center' ? 'sm:justify-center' : ''}`}>{buttons}</div>}
 
         {highlights && (
           <div className={`mt-8 flex flex-wrap gap-x-8 gap-y-4 ${align === 'center' ? 'justify-center' : ''}`}>

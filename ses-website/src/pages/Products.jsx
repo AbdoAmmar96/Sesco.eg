@@ -204,7 +204,7 @@ export default function Products() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:flex-wrap">
                 <Link to="/contact" className="btn btn-orange">
                   Request a Quotation <ArrowRight className="h-4 w-4" />
                 </Link>

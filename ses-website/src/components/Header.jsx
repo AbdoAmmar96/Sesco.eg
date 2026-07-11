@@ -7,7 +7,7 @@ import { useContent } from '../context/ContentContext'
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
+  { to: '/about', label: 'About us' },
   { to: '/services', label: 'Services', dropdown: 'services' },
   { to: '/products', label: 'Products', dropdown: 'products' },
   { to: '/projects', label: 'Projects' },
