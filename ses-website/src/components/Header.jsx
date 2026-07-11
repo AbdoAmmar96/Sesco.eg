@@ -17,7 +17,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(true)
   const [openDrop, setOpenDrop] = useState(null)
   const location = useLocation()
   const closeTimer = useRef(null)
@@ -42,7 +42,7 @@ export default function Header() {
 
   // close menus on route change
   useEffect(() => {
-    setMobileOpen(false)
+    // setMobileOpen(false) //TEMP
     setOpenDrop(null)
   }, [location.pathname])
 
@@ -110,16 +110,24 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-line bg-white lg:hidden">
-          <nav className="container flex flex-col py-4">
-            {navLinks.map((l) => (
-              <MobileItem key={l.to} link={l} />
-            ))}
-            <Link to="/contact" className="btn btn-orange mt-3">
-              Request a Quotation <ArrowRight className="h-4 w-4" />
-            </Link>
-          </nav>
-        </div>
+        <>
+          {/* Dim backdrop behind the menu — tap to close */}
+          <div
+            className="fixed inset-x-0 bottom-0 top-[72px] z-40 bg-black/50 lg:hidden"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="relative z-50 border-t border-line bg-white lg:hidden">
+            <nav className="container flex flex-col py-4">
+              {navLinks.map((l) => (
+                <MobileItem key={l.to} link={l} />
+              ))}
+              <Link to="/contact" className="btn btn-orange mt-3">
+                Request a Quotation <ArrowRight className="h-4 w-4" />
+              </Link>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   )
