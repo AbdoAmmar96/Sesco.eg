@@ -17,7 +17,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(true)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState(null)
   const location = useLocation()
   const closeTimer = useRef(null)
@@ -42,7 +42,7 @@ export default function Header() {
 
   // close menus on route change
   useEffect(() => {
-    // setMobileOpen(false) //TEMP
+    setMobileOpen(false)
     setOpenDrop(null)
   }, [location.pathname])
 
