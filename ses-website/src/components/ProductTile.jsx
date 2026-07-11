@@ -5,12 +5,18 @@ import SmartImage from './SmartImage'
 /**
  * Small product tile used inside category grids and featured carousels.
  * `size="sm"` for dense subcategory grids, `size="md"` for featured cards.
- * For md tiles, pass `to` + `ctaLabel` to show a "View Details →" link.
+ * When `to` is passed the whole tile becomes a link to that product's page;
+ * for md tiles it also shows a "View Details →" affordance.
  */
 export default function ProductTile({ name, spec, icon = 'box', src, size = 'sm', to, ctaLabel }) {
+  // The whole tile is a link when `to` is set, otherwise a plain div.
+  const Wrapper = to ? Link : 'div'
+  const linkProps = to ? { to } : {}
+
   if (size === 'md') {
     return (
-      <div
+      <Wrapper
+        {...linkProps}
         className="card card-hover group flex h-full min-h-[248px] w-[190px] shrink-0 flex-col p-3 text-center"
         style={{ scrollSnapAlign: 'start' }}
       >
@@ -26,20 +32,20 @@ export default function ProductTile({ name, spec, icon = 'box', src, size = 'sm'
           <p className="text-sm font-bold leading-snug text-navy-900">{name}</p>
           {spec && <p className="mt-1 text-xs leading-snug text-navy-400">{spec}</p>}
           {to && (
-            <Link
-              to={to}
-              className="mt-2 inline-flex items-center justify-center gap-1 text-xs font-semibold text-brand-orange transition-all hover:gap-2"
-            >
+            <span className="mt-2 inline-flex items-center justify-center gap-1 text-xs font-semibold text-brand-orange transition-all group-hover:gap-2">
               {ctaLabel || 'View Details'} <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </span>
           )}
         </div>
-      </div>
+      </Wrapper>
     )
   }
 
   return (
-    <div className="group flex h-full flex-col items-center rounded-lg border border-line bg-white p-2.5 text-center transition-all hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-card">
+    <Wrapper
+      {...linkProps}
+      className="group flex h-full flex-col items-center rounded-lg border border-line bg-white p-2.5 text-center transition-all hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-card"
+    >
       <SmartImage
         src={src}
         icon={icon}
@@ -49,6 +55,6 @@ export default function ProductTile({ name, spec, icon = 'box', src, size = 'sm'
         rounded="rounded-md"
       />
       <p className="mt-2 text-[11px] font-semibold leading-tight text-navy-700">{name}</p>
-    </div>
+    </Wrapper>
   )
 }

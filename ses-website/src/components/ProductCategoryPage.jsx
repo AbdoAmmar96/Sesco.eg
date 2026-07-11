@@ -7,6 +7,7 @@ import SectionTitle from './SectionTitle'
 import ProductTile from './ProductTile'
 import Carousel from './Carousel'
 import Reveal from './Reveal'
+import { slugify } from '../lib/utils'
 
 // Real product catalogs (PDF) served from /public/catalogs, keyed by category
 // slug. A slug without an entry falls back to the placeholder download.
@@ -112,7 +113,13 @@ export default function ProductCategoryPage({ category, data, slug }) {
 
                   <div className="mt-4 grid grid-cols-3 gap-2.5">
                     {g.items.map((it) => (
-                      <ProductTile key={it.name} name={it.name} icon={it.icon} src={`/images/p-${slugify(it.name)}.jpg`} />
+                      <ProductTile
+                        key={it.name}
+                        name={it.name}
+                        icon={it.icon}
+                        src={`/images/p-${slugify(it.name)}.jpg`}
+                        to={`/products/${slug}/${slugify(it.name)}`}
+                      />
                     ))}
                   </div>
 
@@ -142,7 +149,7 @@ export default function ProductCategoryPage({ category, data, slug }) {
                   spec={f.spec}
                   icon={f.icon}
                   size="md"
-                  to="/contact"
+                  to={`/products/${slug}/${slugify(f.name)}`}
                   ctaLabel="View Details"
                   src={f.image || `/images/p-${slugify(f.name)}.jpg`}
                 />
@@ -233,12 +240,4 @@ function Trust({ icon, label }) {
       <span className="text-xs font-semibold">{label}</span>
     </div>
   )
-}
-
-function slugify(s) {
-  return s
-    .toLowerCase()
-    .replace(/[°²&()/]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
 }
