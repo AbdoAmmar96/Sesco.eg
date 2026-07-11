@@ -301,10 +301,76 @@
         "image": "/images/p-upright-sprinkler.jpg"
       },
       {
+        "name": "Sprinkler System — Ref 41",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "sprinkler",
+        "image": "/images/p-sprinkler-system-ref-41.jpg"
+      },
+      {
+        "name": "Sprinkler System — Ref 42",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "sprinkler",
+        "image": "/images/p-sprinkler-system-ref-42.jpg"
+      },
+      {
+        "name": "Sprinkler System — Ref 43",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "sprinkler",
+        "image": "/images/p-sprinkler-system-ref-43.jpg"
+      },
+      {
         "name": "OS&Y Valve Flanged",
         "spec": "",
         "icon": "coupling",
         "image": "/images/p-osy-valve-flanged.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 103",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-103.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 37",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-37.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 3",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-3.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 104",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-104.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 38",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-38.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 31",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-31.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 45",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-45.jpg"
+      },
+      {
+        "name": "Fire Fighting Valve & Control — Ref 39",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-fire-fighting-valve-control-ref-39.jpg"
       },
       {
         "name": "Flow switch",
@@ -313,10 +379,46 @@
         "image": "/images/p-flow-switch.jpg"
       },
       {
+        "name": "Supervision Device — Ref 33",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "gauge",
+        "image": "/images/p-supervision-device-ref-33.jpg"
+      },
+      {
+        "name": "Supervision Device — Ref 32",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "gauge",
+        "image": "/images/p-supervision-device-ref-32.jpg"
+      },
+      {
         "name": "dry barrel hydrant",
         "spec": "",
         "icon": "hydrant",
         "image": "/images/p-dry-barrel-hydrant.jpg"
+      },
+      {
+        "name": "Hydrant System — Ref 46",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "hydrant",
+        "image": "/images/p-hydrant-system-ref-46.jpg"
+      },
+      {
+        "name": "Hydrant System — Ref 47",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "hydrant",
+        "image": "/images/p-hydrant-system-ref-47.jpg"
+      },
+      {
+        "name": "Hydrant System — Ref 36",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "hydrant",
+        "image": "/images/p-hydrant-system-ref-36.jpg"
+      },
+      {
+        "name": "Hydrant System — Ref 48",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "hydrant",
+        "image": "/images/p-hydrant-system-ref-48.jpg"
       },
       {
         "name": "Single Fire Hose Cabinet FHC-Class1&2",
@@ -325,16 +427,88 @@
         "image": "/images/p-single-fire-hose-cabinet-fhc-class12.jpg"
       },
       {
+        "name": "Fire Cabinet & Hose System — Ref 90",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-90.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 51",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-51.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 52",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-52.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 96",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-96.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 97",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-97.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 98",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-98.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 53",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-53.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 54",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-54.jpg"
+      },
+      {
+        "name": "Fire Cabinet & Hose System — Ref 55",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cabinet",
+        "image": "/images/p-fire-cabinet-hose-system-ref-55.jpg"
+      },
+      {
         "name": "Breeching Connection",
         "spec": "",
         "icon": "coupling",
         "image": "/images/p-breeching-connection.jpg"
       },
       {
+        "name": "Breeching & Fire Department Connection — Ref 50",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "coupling",
+        "image": "/images/p-breeching-fire-department-connection-ref-50.jpg"
+      },
+      {
         "name": "Seamless Pipes",
         "spec": "",
         "icon": "pipe",
         "image": "/images/p-seamless-pipes.jpg"
+      },
+      {
+        "name": "Pipes & Fitting — Ref 81",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "pipe",
+        "image": "/images/p-pipes-fitting-ref-81.jpg"
+      },
+      {
+        "name": "Pipes & Fitting — Ref 62",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "pipe",
+        "image": "/images/p-pipes-fitting-ref-62.jpg"
       },
       {
         "name": "Threaded Fitting",
@@ -396,7 +570,14 @@
         ]
       }
     ],
-    "featured": []
+    "featured": [
+      {
+        "name": "Fire Alarm System",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "bell",
+        "image": "/images/p-fire-alarm-system.jpg"
+      }
+    ]
   },
   "water-network": {
     "filters": [
@@ -500,6 +681,55 @@
         ]
       }
     ],
-    "featured": []
+    "featured": [
+      {
+        "name": "Isolation Valve",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-isolation-valve.jpg"
+      },
+      {
+        "name": "Isolation Valve — Ref 86",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-isolation-valve-ref-86.jpg"
+      },
+      {
+        "name": "Check Valve",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-check-valve.jpg"
+      },
+      {
+        "name": "Air Valve",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "gauge",
+        "image": "/images/p-air-valve.jpg"
+      },
+      {
+        "name": "Special Valve",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "valve",
+        "image": "/images/p-special-valve.jpg"
+      },
+      {
+        "name": "Strainer",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "grid",
+        "image": "/images/p-strainer.jpg"
+      },
+      {
+        "name": "Manhole Cover",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "cover",
+        "image": "/images/p-manhole-cover.jpg"
+      },
+      {
+        "name": "Ductile Iron Fitting",
+        "spec": "للحصول على هذا المنتج، الرجاء التواصل مع المورد",
+        "icon": "coupling",
+        "image": "/images/p-ductile-iron-fitting.jpg"
+      }
+    ]
   }
 }
