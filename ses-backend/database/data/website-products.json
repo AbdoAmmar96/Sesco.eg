@@ -1,7 +1,14 @@
 {
   "fire-fighting": {
     "filters": [
-      "All Products"
+      "All Products",
+      "Pumps",
+      "Sprinkler",
+      "Valves",
+      "Hydrant",
+      "Cabinets",
+      "Pipes",
+      "Gases"
     ],
     "groups": [
       {
@@ -562,10 +569,6 @@
           {
             "name": "Fire Alarm Systems",
             "icon": "bell"
-          },
-          {
-            "name": "Products To Prepare Documents For",
-            "icon": "box"
           }
         ]
       }
@@ -581,7 +584,11 @@
   },
   "water-network": {
     "filters": [
-      "All Products"
+      "All Products",
+      "Valves",
+      "Strainers",
+      "Fittings",
+      "Covers"
     ],
     "groups": [
       {
