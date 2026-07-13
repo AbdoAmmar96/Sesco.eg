@@ -103,8 +103,6 @@ export default function Footer() {
         <div className="container flex flex-col items-center justify-between gap-3 py-5 text-xs text-white/50 md:flex-row">
           <p>© {year} {company.name}. All Rights Reserved.</p>
           <div className="flex flex-col items-center gap-1 text-center md:flex-row md:gap-4">
-            <p className="text-white/45">{company.tagline}</p>
-            <span className="hidden text-white/20 md:inline">|</span>
             <p className="text-white/45">
               ©&nbsp;{year}{' '}
               <a
