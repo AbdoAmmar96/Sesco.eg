@@ -12,13 +12,13 @@ export const company = {
   address: '56/5 Forsan City, Qatameya, Cairo, Egypt',
   phone: '+20 100 302 9064',
   phoneHref: 'tel:+201003029064',
-  email: 'mallamy@sescoeg.com',
+  email: 'sales@sesco.eg.com',
   website: 'www.sescoeg.com',
   websiteHref: 'https://www.sescoeg.com',
   hours: 'Sun – Thu: 9:00 AM – 5:00 PM',
   hoursNote: 'We are closed on Fridays and Saturdays.',
   mapEmbed:
-    'https://www.google.com/maps?q=New+Cairo,+Qatameya,+Cairo,+Egypt&output=embed',
+    'https://www.google.com/maps?q=29.9866736,31.3372648&z=16&output=embed',
   social: {
     facebook: '#',
     linkedin: '#',
