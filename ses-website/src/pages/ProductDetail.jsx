@@ -56,7 +56,9 @@ export default function ProductDetail() {
   // A few sibling products from the same category, for cross-navigation.
   const siblings = [
     ...detail.featured.map((f) => ({ name: f.name, icon: f.icon, image: f.image })),
-    ...detail.groups.flatMap((g) => (g.items || []).map((it) => ({ name: it.name, icon: it.icon }))),
+    ...detail.groups.flatMap((g) =>
+      (g.items || []).map((it) => ({ name: it.name, icon: it.icon, image: it.image })),
+    ),
   ]
     .filter((p) => slugify(p.name) !== productSlug)
     .filter((p, i, arr) => arr.findIndex((x) => slugify(x.name) === slugify(p.name)) === i)

@@ -133,7 +133,11 @@ class ContentController extends Controller
                 'title' => $g->title,
                 'desc' => $g->description,
                 'cta' => $g->cta,
-                'items' => $g->items ?? [],
+                'items' => collect($g->items ?? [])->map(fn ($it) => [
+                    'name' => $it['name'] ?? '',
+                    'icon' => $it['icon'] ?? 'box',
+                    'image' => $this->media($it['image'] ?? null),
+                ])->values(),
             ]),
             'featured' => $cat->featured->map(fn ($f) => [
                 'name' => $f->name,

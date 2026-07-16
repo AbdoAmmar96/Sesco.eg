@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesUploads;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use App\Models\ProductGroup;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 
 class ProductGroupController extends Controller
 {
+    use HandlesUploads;
+
     public function index()
     {
         $items = ProductGroup::with('category')
@@ -62,7 +65,10 @@ class ProductGroupController extends Controller
             'cta' => ['nullable', 'string', 'max:120'],
             'n' => ['nullable', 'integer'],
             'sort_order' => ['nullable', 'integer'],
-            'items' => ['nullable', 'string', 'max:4000'],
+            'items' => ['nullable', 'array', 'max:200'],
+            'items.*.name' => ['nullable', 'string', 'max:160'],
+            'items.*.icon' => ['nullable', 'string', 'max:60'],
+            'items.*.image' => ['nullable', 'image', 'max:4096'],
         ]);
 
         return [
@@ -71,9 +77,35 @@ class ProductGroupController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'cta' => $request->cta,
-            'items' => parse_item_lines($request->items),
+            'items' => $this->itemRows($request),
             'sort_order' => (int) $request->sort_order,
             'is_active' => $request->boolean('is_active'),
         ];
+    }
+
+    /**
+     * Build the items JSON from the repeater rows. A row keeps its existing
+     * image unless a new file is uploaded for it; rows left unnamed are
+     * dropped, which is how the form deletes an item.
+     */
+    private function itemRows(Request $request): array
+    {
+        $rows = [];
+
+        foreach ((array) $request->input('items', []) as $i => $row) {
+            $name = trim((string) ($row['name'] ?? ''));
+            if ($name === '') {
+                continue;
+            }
+
+            $rows[] = [
+                'name' => $name,
+                'icon' => trim((string) ($row['icon'] ?? '')) ?: 'box',
+                'image' => $this->storeUpload($request, "items.{$i}.image", 'groups')
+                    ?: (trim((string) ($row['image_current'] ?? '')) ?: null),
+            ];
+        }
+
+        return $rows;
     }
 }

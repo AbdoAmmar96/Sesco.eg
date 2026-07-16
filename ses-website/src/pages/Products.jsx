@@ -29,7 +29,7 @@ export default function Products() {
         seen.add(s)
         out.push({ name, icon, image, group, category: cat.name, categorySlug: cat.slug })
       }
-      for (const g of det.groups || []) for (const it of g.items || []) push(it.name, it.icon, null, g.title)
+      for (const g of det.groups || []) for (const it of g.items || []) push(it.name, it.icon, it.image, g.title)
       for (const f of det.featured || []) push(f.name, f.icon, f.image, null)
     }
     return out

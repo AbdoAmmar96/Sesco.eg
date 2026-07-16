@@ -24,7 +24,7 @@ export default function About() {
         <div className="container grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <SmartImage
-              src="/images/about-pumproom.jpg"
+              src="/images/about-firepiping.jpg"
               icon="pump"
               label="Engineered Solutions"
               className="aspect-[4/3] w-full shadow-card"

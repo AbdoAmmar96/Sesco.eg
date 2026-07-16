@@ -117,7 +117,7 @@ export default function ProductCategoryPage({ category, data, slug }) {
                         key={it.name}
                         name={it.name}
                         icon={it.icon}
-                        src={`/images/p-${slugify(it.name)}.jpg`}
+                        src={it.image || `/images/p-${slugify(it.name)}.jpg`}
                         to={`/products/${slug}/${slugify(it.name)}`}
                       />
                     ))}
