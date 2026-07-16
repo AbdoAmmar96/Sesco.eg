@@ -129,30 +129,41 @@ function DropdownPanel({ type, onEnter, onLeave }) {
   const { productCategories, services } = useContent()
   const items = type === 'services' ? services : productCategories
   const baseTo = type === 'services' ? '/services' : '/products'
+  // The services list grows from the CMS, so it gets a two-column panel that
+  // stays compact; products are only a handful of categories and stay single.
+  // Either way the panel caps its height and scrolls once the list outgrows it.
+  const twoCols = type === 'services'
+
   return (
     <div
-      className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3"
+      className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 ${twoCols ? 'w-[620px]' : 'w-[300px]'}`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
       <div className="origin-top animate-fade-up overflow-hidden rounded-xl border border-line bg-white shadow-card-hover">
-        {items.map((it) => (
-          <Link
-            key={it.slug || it.name}
-            to={it.slug ? `/${type}/${it.slug}` : baseTo}
-            className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-navy-50"
-          >
-            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-brand-royal">
-              <Icon name={it.icon} className="h-5 w-5" />
-            </span>
-            <span>
-              <span className="block text-sm font-semibold text-navy-800">{it.name}</span>
-              <span className="block text-xs text-navy-500 line-clamp-1">
-                {it.short || it.desc}
+        <div
+          className={`max-h-[min(26rem,70vh)] overflow-y-auto overscroll-contain ${
+            twoCols ? 'grid grid-cols-2' : ''
+          }`}
+        >
+          {items.map((it) => (
+            <Link
+              key={it.slug || it.name}
+              to={it.slug ? `/${type}/${it.slug}` : baseTo}
+              className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-navy-50"
+            >
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-brand-royal">
+                <Icon name={it.icon} className="h-5 w-5" />
               </span>
-            </span>
-          </Link>
-        ))}
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold text-navy-800">{it.name}</span>
+                <span className="block text-xs text-navy-500 line-clamp-1">
+                  {it.short || it.desc}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
