@@ -157,7 +157,9 @@ function DropdownPanel({ type, onEnter, onLeave }) {
               </span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-navy-800">{it.name}</span>
-                <span className="block text-xs text-navy-500 line-clamp-1">
+                {/* No `block` here: line-clamp sets its own display and `block`
+                    would override it, leaving the text unclamped. */}
+                <span className="text-xs text-navy-500 line-clamp-1">
                   {it.short || it.desc}
                 </span>
               </span>
