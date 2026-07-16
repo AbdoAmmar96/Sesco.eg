@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesUploads;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -9,6 +10,8 @@ use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
+    use HandlesUploads;
+
     public function index()
     {
         $items = Service::orderBy('sort_order')->get();
@@ -23,7 +26,11 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        Service::create($this->validated($request));
+        $data = $this->validated($request);
+        if ($path = $this->storeUpload($request, 'image', 'services')) {
+            $data['image'] = $path;
+        }
+        Service::create($data);
 
         return redirect()->route('admin.services.index')->with('ok', 'Service created.');
     }
@@ -35,7 +42,11 @@ class ServiceController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $service->update($this->validated($request));
+        $data = $this->validated($request);
+        if ($path = $this->storeUpload($request, 'image', 'services')) {
+            $data['image'] = $path;
+        }
+        $service->update($data);
 
         return redirect()->route('admin.services.index')->with('ok', 'Service updated.');
     }
@@ -52,6 +63,7 @@ class ServiceController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:160'],
             'icon' => ['nullable', 'string', 'max:60'],
+            'image' => ['nullable', 'image', 'max:4096'],
             'description' => ['nullable', 'string', 'max:1000'],
             'sort_order' => ['nullable', 'integer'],
         ]);

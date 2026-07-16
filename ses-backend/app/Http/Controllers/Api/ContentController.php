@@ -44,6 +44,7 @@ class ContentController extends Controller
                 'name' => $s->name,
                 'icon' => $s->icon,
                 'desc' => $s->description,
+                'image' => $this->media($s->image),
             ]),
 
             'homeServices' => $this->blocks($blocks, 'home_services', fn ($b) => [

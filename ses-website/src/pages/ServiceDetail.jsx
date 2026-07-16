@@ -37,7 +37,7 @@ export default function ServiceDetail() {
         breadcrumb={[{ label: 'Services', to: '/services' }, { label: service.name }]}
         title={service.name}
         subtitle={data.tagline || service.desc}
-        bgImage={`/images/service-${slug}.jpg`}
+        bgImage={service.image || `/images/service-${slug}.jpg`}
         buttons={
           <>
             <Link to="/contact" className="btn btn-orange">
@@ -134,7 +134,7 @@ export default function ServiceDetail() {
                 <Reveal key={s.slug} delay={(i % 4) * 80} className="h-full">
                   <Link to={`/services/${s.slug}`} className="card card-hover group flex h-full flex-col overflow-hidden">
                     <SmartImage
-                      src={`/images/service-${s.slug}.jpg`}
+                      src={s.image || `/images/service-${s.slug}.jpg`}
                       icon={s.icon}
                       label={s.name}
                       className="h-32 w-full"

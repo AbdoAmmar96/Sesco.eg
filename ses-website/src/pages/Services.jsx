@@ -44,7 +44,7 @@ export default function Services() {
               <Reveal key={s.slug} delay={(i % 4) * 80}>
                 <div className="card card-hover group flex h-full flex-col overflow-hidden">
                   <SmartImage
-                    src={`/images/service-${s.slug}.jpg`}
+                    src={s.image || `/images/service-${s.slug}.jpg`}
                     icon={s.icon}
                     label={s.name}
                     className="h-40 w-full"

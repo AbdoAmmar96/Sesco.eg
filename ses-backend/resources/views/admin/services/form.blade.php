@@ -11,6 +11,8 @@
 
         <x-input name="name" label="Service Name" :value="$item->name" required />
         <x-input name="icon" label="Icon" :value="$item->icon" hint="Lucide icon key, e.g. wrench, flame, droplet" />
+        <x-upload name="image" label="Service Image" :current="$item->image"
+                  hint="Used on the service card and as the hero background. Leave empty to keep the current image." />
         <x-textarea name="description" label="Description" :value="$item->description" />
         <x-input name="sort_order" label="Sort Order" type="number" :value="$item->sort_order ?? 0" />
         <x-check :checked="$item->is_active ?? true" />
