@@ -62,7 +62,7 @@ class ConsultantController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:160'],
             'sort_order' => ['nullable', 'integer'],
-            'logo' => ['nullable', 'image', 'max:2048'],
+            'logo' => ['nullable', 'image', 'max:8192'],
         ]);
 
         return [

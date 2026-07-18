@@ -63,7 +63,7 @@ class ServiceController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:160'],
             'icon' => ['nullable', 'string', 'max:60'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'max:12288'],
             'description' => ['nullable', 'string', 'max:1000'],
             'sort_order' => ['nullable', 'integer'],
         ]);

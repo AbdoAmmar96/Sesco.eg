@@ -66,7 +66,7 @@ class ProductCategoryController extends Controller
             'icon' => ['nullable', 'string', 'max:60'],
             'short' => ['nullable', 'string', 'max:1000'],
             'intro' => ['nullable', 'string', 'max:1000'],
-            'hero_image' => ['nullable', 'image', 'max:4096'],
+            'hero_image' => ['nullable', 'image', 'max:12288'],
             'filters' => ['nullable', 'string', 'max:2000'],
             'highlights' => ['nullable', 'string', 'max:2000'],
             'card_items' => ['nullable', 'string', 'max:2000'],

@@ -75,7 +75,7 @@ class ProjectController extends Controller
             'icon' => ['nullable', 'string', 'max:60'],
             'tags' => ['nullable', 'string', 'max:300'],
             'sort_order' => ['nullable', 'integer'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'max:12288'],
         ]);
 
         $tags = collect(preg_split('/[,\n]+/', (string) $request->tags))

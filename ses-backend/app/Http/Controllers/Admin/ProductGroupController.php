@@ -68,7 +68,7 @@ class ProductGroupController extends Controller
             'items' => ['nullable', 'array', 'max:200'],
             'items.*.name' => ['nullable', 'string', 'max:160'],
             'items.*.icon' => ['nullable', 'string', 'max:60'],
-            'items.*.image' => ['nullable', 'image', 'max:4096'],
+            'items.*.image' => ['nullable', 'image', 'max:12288'],
         ]);
 
         return [

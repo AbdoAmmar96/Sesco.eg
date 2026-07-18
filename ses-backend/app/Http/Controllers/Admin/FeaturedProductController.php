@@ -75,7 +75,7 @@ class FeaturedProductController extends Controller
             'icon' => ['nullable', 'string', 'max:60'],
             'product_category_id' => ['nullable', 'exists:product_categories,id'],
             'sort_order' => ['nullable', 'integer'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'max:12288'],
         ]);
 
         return [

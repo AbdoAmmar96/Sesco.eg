@@ -62,7 +62,7 @@ class BrandController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'sort_order' => ['nullable', 'integer'],
-            'logo' => ['nullable', 'image', 'max:2048'],
+            'logo' => ['nullable', 'image', 'max:8192'],
         ]);
 
         return [
