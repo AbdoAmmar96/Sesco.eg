@@ -34,6 +34,10 @@ class FeaturedProductController extends Controller
         if ($path = $this->storeUpload($request, 'image', 'featured')) {
             $data['image'] = $path;
         }
+        if ($path = $this->storeUpload($request, 'diagram_image', 'featured')) {
+            $data['diagram_image'] = $path;
+        }
+        $data['gallery'] = $this->galleryPaths($request, []);
         FeaturedProduct::create($data);
 
         return redirect()->route('admin.featured-products.index')->with('ok', 'Featured product created.');
@@ -50,6 +54,10 @@ class FeaturedProductController extends Controller
         if ($path = $this->storeUpload($request, 'image', 'featured')) {
             $data['image'] = $path;
         }
+        if ($path = $this->storeUpload($request, 'diagram_image', 'featured')) {
+            $data['diagram_image'] = $path;
+        }
+        $data['gallery'] = $this->galleryPaths($request, $featuredProduct->gallery ?? []);
         $featuredProduct->update($data);
 
         return redirect()->route('admin.featured-products.index')->with('ok', 'Featured product updated.');
@@ -76,6 +84,14 @@ class FeaturedProductController extends Controller
             'product_category_id' => ['nullable', 'exists:product_categories,id'],
             'sort_order' => ['nullable', 'integer'],
             'image' => ['nullable', 'image', 'max:12288'],
+            'diagram_image' => ['nullable', 'image', 'max:12288'],
+            'diagram_caption' => ['nullable', 'string', 'max:255'],
+            'gallery.*' => ['nullable', 'image', 'max:12288'],
+            'overview' => ['nullable', 'string', 'max:5000'],
+            'highlights' => ['nullable', 'string', 'max:2000'],
+            'tech_features' => ['nullable', 'string', 'max:8000'],
+            'dimensions' => ['nullable', 'string', 'max:8000'],
+            'materials' => ['nullable', 'string', 'max:8000'],
         ]);
 
         return [
@@ -85,6 +101,77 @@ class FeaturedProductController extends Controller
             'product_category_id' => $request->product_category_id ?: null,
             'sort_order' => (int) $request->sort_order,
             'is_active' => $request->boolean('is_active'),
+            'overview' => $request->overview ?: null,
+            'diagram_caption' => $request->diagram_caption ?: null,
+            'highlights' => lines_to_array($request->highlights) ?: null,
+            'tech_features' => $this->parsePairs($request->tech_features) ?: null,
+            'dimensions' => $this->parseTable($request->dimensions),
+            'materials' => $this->parseMaterials($request->materials) ?: null,
         ];
+    }
+
+    /**
+     * Merge kept + newly uploaded gallery images. `gallery_current[]` carries
+     * the paths of existing images the admin didn't remove; new files arrive in
+     * the `gallery[]` file input.
+     */
+    private function galleryPaths(Request $request, array $existing): array
+    {
+        $kept = array_values(array_filter(
+            (array) $request->input('gallery_current', []),
+            fn ($p) => is_string($p) && $p !== '' && in_array($p, $existing, true)
+        ));
+
+        return array_merge($kept, $this->storeUploads($request, 'gallery', 'featured'));
+    }
+
+    /** "Label | Value" per line → [['label'=>.., 'value'=>..], ...]. */
+    private function parsePairs(?string $text): array
+    {
+        return collect(preg_split('/\r\n|\r|\n/', (string) $text))
+            ->map(fn ($l) => trim($l))->filter()
+            ->map(function ($l) {
+                $p = array_map('trim', explode('|', $l, 2));
+
+                return ['label' => $p[0], 'value' => $p[1] ?? ''];
+            })->values()->all();
+    }
+
+    /** "No | Name | Material | Standard" per line → list of assoc rows. */
+    private function parseMaterials(?string $text): array
+    {
+        return collect(preg_split('/\r\n|\r|\n/', (string) $text))
+            ->map(fn ($l) => trim($l))->filter()
+            ->map(function ($l) {
+                $p = array_map('trim', explode('|', $l));
+
+                return [
+                    'no' => $p[0] ?? '',
+                    'name' => $p[1] ?? '',
+                    'material' => $p[2] ?? '',
+                    'standard' => $p[3] ?? '',
+                ];
+            })->values()->all();
+    }
+
+    /**
+     * A flexible-column table: the first non-empty line is the column headers,
+     * every following line is a row. Cells are separated by "|". Returns
+     * ['columns' => [...], 'rows' => [[...], ...]] or null when empty.
+     */
+    private function parseTable(?string $text): ?array
+    {
+        $lines = collect(preg_split('/\r\n|\r|\n/', (string) $text))
+            ->map(fn ($l) => trim($l))->filter()->values();
+
+        if ($lines->isEmpty()) {
+            return null;
+        }
+
+        $split = fn ($l) => array_map('trim', explode('|', $l));
+        $columns = $split($lines->first());
+        $rows = $lines->slice(1)->map($split)->values()->all();
+
+        return ['columns' => $columns, 'rows' => $rows];
     }
 }

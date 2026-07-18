@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowRight, Phone, MessageCircle, Info, CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/PageHero'
@@ -5,7 +6,7 @@ import SectionTitle from '../components/SectionTitle'
 import SmartImage from '../components/SmartImage'
 import ProductTile from '../components/ProductTile'
 import Reveal from '../components/Reveal'
-import Icon, { IconBadge } from '../components/Icon'
+import { IconBadge } from '../components/Icon'
 import NotFound from './NotFound'
 import { useContent } from '../context/ContentContext'
 import { slugify } from '../lib/utils'
@@ -29,13 +30,31 @@ function findProduct(detail, productSlug) {
 
 export default function ProductDetail() {
   const { slug, product: productSlug } = useParams()
-  const { productCategories, categoryDetails, company, loaded } = useContent()
+  const { productCategories, categoryDetails, featuredSolutions, company, loaded } = useContent()
 
-  const category = productCategories.find((c) => c.slug === slug)
-  const detail = (categoryDetails && categoryDetails[slug]) || { groups: [], featured: [] }
-  const found = category ? findProduct(detail, productSlug) : null
+  // Two entry points share this page: category products (/products/:slug/:product)
+  // and home "Featured Solutions" (/featured/:product), which have no category.
+  const isFeatured = !slug
 
-  if (!category || !found) {
+  let category = null
+  let detail = { groups: [], featured: [] }
+  let product = null
+  let group = null
+
+  if (isFeatured) {
+    product = (featuredSolutions || []).find((f) => slugify(f.name) === productSlug) || null
+  } else {
+    category = productCategories.find((c) => c.slug === slug)
+    detail = (categoryDetails && categoryDetails[slug]) || detail
+    const found = category ? findProduct(detail, productSlug) : null
+    if (found) {
+      product = found.product
+      group = found.group
+    }
+  }
+
+  const missing = isFeatured ? !product : !category || !product
+  if (missing) {
     if (!loaded) {
       return (
         <div className="flex min-h-[60vh] items-center justify-center text-navy-400">
@@ -46,17 +65,22 @@ export default function ProductDetail() {
     return <NotFound />
   }
 
-  const { product, group } = found
-  const image = product.image || `/images/p-${slugify(product.name)}.jpg`
-  // Products extracted from the catalogue with no datasheet carry this note in
-  // `spec`; treat it as the "contact supplier" state rather than a real spec.
-  const contactOnly = typeof product.spec === 'string' && product.spec.includes('المورد')
-  const hasSpec = product.spec && !contactOnly
+  const categoryName = category?.name || 'Featured Solutions'
+  const categoryTo = category ? `/products/${slug}` : '/products'
+  const fallbackImage = `/images/p-${slugify(product.name)}.jpg`
+
+  // Datasheet fields exist only on featured products; group items won't have them.
+  const highlights = product.highlights || []
+  const techFeatures = product.techFeatures || []
+  const dimensions = product.dimensions || null
+  const materials = product.materials || []
+  const overview = product.overview || (product.spec && !contactMarker(product.spec) ? product.spec : '')
+  const contactOnly = contactMarker(product.spec)
 
   // A few sibling products from the same category, for cross-navigation.
   const siblings = [
-    ...detail.featured.map((f) => ({ name: f.name, icon: f.icon, image: f.image })),
-    ...detail.groups.flatMap((g) =>
+    ...(detail.featured || []).map((f) => ({ name: f.name, icon: f.icon, image: f.image })),
+    ...(detail.groups || []).flatMap((g) =>
       (g.items || []).map((it) => ({ name: it.name, icon: it.icon, image: it.image })),
     ),
   ]
@@ -64,18 +88,14 @@ export default function ProductDetail() {
     .filter((p, i, arr) => arr.findIndex((x) => slugify(x.name) === slugify(p.name)) === i)
     .slice(0, 6)
 
-  const quoteHref = `/contact?product=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category.name)}`
+  const quoteHref = `/contact?product=${encodeURIComponent(product.name)}&category=${encodeURIComponent(categoryName)}`
 
   return (
     <>
       <PageHero
-        breadcrumb={[
-          { label: 'Products', to: '/products' },
-          { label: category.name, to: `/products/${slug}` },
-          { label: product.name },
-        ]}
+        breadcrumb={[{ label: 'Products', to: '/products' }, { label: categoryName, to: categoryTo }, { label: product.name }]}
         title={product.name}
-        subtitle={group ? `${category.name} · ${group.title}` : category.name}
+        subtitle={group ? `${categoryName} · ${group.title}` : categoryName}
         buttons={
           <>
             <Link to={quoteHref} className="btn btn-orange">
@@ -88,37 +108,45 @@ export default function ProductDetail() {
         }
       />
 
-      {/* Overview: image + details */}
+      {/* Overview: gallery + details */}
       <section className="section bg-surface">
         <div className="container grid gap-10 lg:grid-cols-2">
-          {/* Image */}
           <Reveal>
-            <SmartImage
-              src={image}
+            <Gallery
+              images={[product.image, ...(product.gallery || [])]}
+              fallback={fallbackImage}
               icon={product.icon}
-              label={product.name}
-              tone="light"
-              className="aspect-square w-full"
-              rounded="rounded-2xl"
+              name={product.name}
             />
           </Reveal>
 
-          {/* Details */}
           <Reveal delay={120}>
             <div className="flex flex-col">
               <div className="flex items-center gap-3">
                 <IconBadge name={product.icon || 'box'} size="lg" />
                 <div>
                   <h2 className="text-2xl font-extrabold text-navy-900">{product.name}</h2>
-                  <Link to={`/products/${slug}`} className="text-sm font-semibold text-brand-royal hover:underline">
-                    {category.name}
+                  <Link to={categoryTo} className="text-sm font-semibold text-brand-royal hover:underline">
+                    {categoryName}
                   </Link>
                 </div>
               </div>
 
-              {hasSpec && <p className="mt-6 text-base leading-relaxed text-navy-600">{product.spec}</p>}
+              {overview && <p className="mt-6 text-base leading-relaxed text-navy-600">{overview}</p>}
 
-              {/* Availability / contact-supplier note */}
+              {highlights.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-2.5">
+                  {highlights.map((h) => (
+                    <span
+                      key={h}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-brand-orange/30 bg-brand-orange/5 px-3 py-1.5 text-xs font-semibold text-navy-800"
+                    >
+                      <CheckCircle2 className="h-4 w-4 text-brand-orange" /> {h}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <div className="mt-6 flex items-start gap-3 rounded-xl border border-brand-orange/30 bg-brand-orange/5 p-4">
                 <Info className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
                 <p className="text-sm leading-relaxed text-navy-700">
@@ -128,12 +156,11 @@ export default function ProductDetail() {
                 </p>
               </div>
 
-              {/* Quick facts */}
               <ul className="mt-6 space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
                   <span className="text-sm leading-relaxed text-navy-700">
-                    Category: <span className="font-semibold">{category.name}</span>
+                    Category: <span className="font-semibold">{categoryName}</span>
                   </span>
                 </li>
                 {group && (
@@ -168,12 +195,128 @@ export default function ProductDetail() {
         </div>
       </section>
 
+      {/* Technical Features */}
+      {techFeatures.length > 0 && (
+        <section className="section bg-white">
+          <div className="container max-w-4xl">
+            <Reveal>
+              <SectionTitle align="left" eyebrow="Technical Features" />
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="mt-8 overflow-hidden rounded-2xl border border-line">
+                <table className="w-full text-sm">
+                  <tbody>
+                    {techFeatures.map((f, i) => (
+                      <tr key={f.label + i} className={i % 2 ? 'bg-surface' : 'bg-white'}>
+                        <th className="w-1/3 border-b border-line px-4 py-3 text-left align-top font-semibold text-navy-800">
+                          {f.label}
+                        </th>
+                        <td className="border-b border-line px-4 py-3 align-top text-navy-600">{f.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Cross-section / diagram */}
+      {product.diagramImage && (
+        <section className="section bg-surface">
+          <div className="container max-w-4xl text-center">
+            <Reveal>
+              <img
+                src={product.diagramImage}
+                alt={product.diagramCaption || `${product.name} diagram`}
+                loading="lazy"
+                className="mx-auto max-h-[520px] w-full rounded-2xl border border-line bg-white object-contain p-4"
+              />
+              {product.diagramCaption && (
+                <p className="mt-4 text-sm font-medium text-navy-500">{product.diagramCaption}</p>
+              )}
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Dimensions */}
+      {dimensions?.columns?.length > 0 && dimensions.rows?.length > 0 && (
+        <section className="section bg-white">
+          <div className="container max-w-4xl">
+            <Reveal>
+              <SectionTitle align="left" eyebrow="Dimensions" />
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
+                <table className="w-full min-w-[520px] text-sm">
+                  <thead>
+                    <tr className="bg-navy-900 text-white">
+                      {dimensions.columns.map((c, i) => (
+                        <th key={i} className="px-4 py-3 text-left font-semibold">{c}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dimensions.rows.map((row, ri) => (
+                      <tr key={ri} className={ri % 2 ? 'bg-surface' : 'bg-white'}>
+                        {dimensions.columns.map((_, ci) => (
+                          <td key={ci} className="border-b border-line px-4 py-2.5 text-navy-700">
+                            {row[ci] ?? ''}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Materials & Standard List */}
+      {materials.length > 0 && (
+        <section className="section bg-surface">
+          <div className="container max-w-4xl">
+            <Reveal>
+              <SectionTitle align="left" eyebrow="Materials & Standard List" />
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
+                <table className="w-full min-w-[600px] text-sm">
+                  <thead>
+                    <tr className="bg-navy-900 text-white">
+                      <th className="px-4 py-3 text-left font-semibold">No.</th>
+                      <th className="px-4 py-3 text-left font-semibold">Name</th>
+                      <th className="px-4 py-3 text-left font-semibold">Material</th>
+                      <th className="px-4 py-3 text-left font-semibold">Standard</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {materials.map((m, i) => (
+                      <tr key={i} className={i % 2 ? 'bg-surface' : 'bg-white'}>
+                        <td className="border-b border-line px-4 py-2.5 font-semibold text-navy-800">{m.no}</td>
+                        <td className="border-b border-line px-4 py-2.5 text-navy-700">{m.name}</td>
+                        <td className="border-b border-line px-4 py-2.5 text-navy-700">{m.material}</td>
+                        <td className="border-b border-line px-4 py-2.5 text-navy-700">{m.standard}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
       {/* Related products from the same category */}
       {siblings.length > 0 && (
         <section className="section bg-white">
           <div className="container">
             <Reveal>
-              <SectionTitle eyebrow={`More from ${category.name}`} />
+              <SectionTitle eyebrow={`More from ${categoryName}`} />
             </Reveal>
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               {siblings.map((p, i) => (
@@ -191,5 +334,51 @@ export default function ProductDetail() {
         </section>
       )}
     </>
+  )
+}
+
+/** Products extracted from the catalogue with no datasheet carry this note in `spec`. */
+function contactMarker(spec) {
+  return typeof spec === 'string' && spec.includes('المورد')
+}
+
+/**
+ * Main product image with an optional thumbnail strip. Falsy/duplicate sources
+ * are dropped; when nothing loads, SmartImage shows the branded placeholder.
+ */
+function Gallery({ images, fallback, icon, name }) {
+  const sources = images.filter((s, i, arr) => s && arr.indexOf(s) === i)
+  const list = sources.length ? sources : [fallback]
+  const [active, setActive] = useState(0)
+  const current = list[Math.min(active, list.length - 1)]
+
+  return (
+    <div>
+      <SmartImage
+        src={current}
+        icon={icon}
+        label={name}
+        tone="light"
+        className="aspect-square w-full"
+        rounded="rounded-2xl"
+      />
+      {list.length > 1 && (
+        <div className="mt-4 flex flex-wrap gap-3">
+          {list.map((src, i) => (
+            <button
+              key={src + i}
+              type="button"
+              onClick={() => setActive(i)}
+              className={`h-16 w-16 overflow-hidden rounded-lg border-2 bg-white transition-colors ${
+                i === active ? 'border-brand-orange' : 'border-line hover:border-navy-200'
+              }`}
+              aria-label={`View image ${i + 1}`}
+            >
+              <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }

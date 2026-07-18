@@ -81,9 +81,7 @@ class ContentController extends Controller
 
             'featuredSolutions' => FeaturedProduct::whereNull('product_category_id')
                 ->where('is_active', true)->orderBy('sort_order')->get()
-                ->map(fn ($f) => [
-                    'name' => $f->name, 'icon' => $f->icon, 'image' => $this->media($f->image),
-                ]),
+                ->map(fn ($f) => $this->featured($f)),
 
             'fireFighting' => $this->categoryDetail('fire-fighting'),
             'fireAlarm' => $this->categoryDetail('fire-alarm'),
@@ -140,12 +138,31 @@ class ContentController extends Controller
                     'image' => $this->media($it['image'] ?? null),
                 ])->values(),
             ]),
-            'featured' => $cat->featured->map(fn ($f) => [
-                'name' => $f->name,
-                'spec' => $f->spec,
-                'icon' => $f->icon,
-                'image' => $this->media($f->image),
-            ]),
+            'featured' => $cat->featured->map(fn ($f) => $this->featured($f)),
+        ];
+    }
+
+    /**
+     * Full featured-product payload: the card fields plus the datasheet
+     * sections (overview, highlights, gallery, diagram, technical features,
+     * dimensions, materials). Image paths are resolved to loadable URLs;
+     * empty sections stay null/[] so the frontend renders only what exists.
+     */
+    private function featured(FeaturedProduct $f): array
+    {
+        return [
+            'name' => $f->name,
+            'spec' => $f->spec,
+            'icon' => $f->icon,
+            'image' => $this->media($f->image),
+            'overview' => $f->overview,
+            'highlights' => $f->highlights ?? [],
+            'gallery' => collect($f->gallery ?? [])->map(fn ($g) => $this->media($g))->filter()->values(),
+            'diagramImage' => $this->media($f->diagram_image),
+            'diagramCaption' => $f->diagram_caption,
+            'techFeatures' => $f->tech_features ?? [],
+            'dimensions' => $f->dimensions,
+            'materials' => $f->materials ?? [],
         ];
     }
 

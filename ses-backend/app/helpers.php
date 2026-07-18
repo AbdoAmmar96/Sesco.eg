@@ -62,3 +62,41 @@ if (! function_exists('array_to_lines')) {
         return collect($arr ?? [])->implode("\n");
     }
 }
+
+if (! function_exists('pairs_to_lines')) {
+    /** Inverse of the "Label | Value" parser — one pair per line. */
+    function pairs_to_lines($pairs): string
+    {
+        return collect($pairs ?? [])
+            ->map(fn ($p) => ($p['label'] ?? '').' | '.($p['value'] ?? ''))
+            ->implode("\n");
+    }
+}
+
+if (! function_exists('materials_to_lines')) {
+    /** Inverse of the materials parser — "No | Name | Material | Standard". */
+    function materials_to_lines($rows): string
+    {
+        return collect($rows ?? [])
+            ->map(fn ($r) => implode(' | ', [
+                $r['no'] ?? '', $r['name'] ?? '', $r['material'] ?? '', $r['standard'] ?? '',
+            ]))
+            ->implode("\n");
+    }
+}
+
+if (! function_exists('table_to_lines')) {
+    /** Inverse of parseTable — header line followed by one line per row. */
+    function table_to_lines($table): string
+    {
+        if (empty($table['columns'])) {
+            return '';
+        }
+        $lines = [implode(' | ', $table['columns'])];
+        foreach ($table['rows'] ?? [] as $row) {
+            $lines[] = implode(' | ', (array) $row);
+        }
+
+        return implode("\n", $lines);
+    }
+}

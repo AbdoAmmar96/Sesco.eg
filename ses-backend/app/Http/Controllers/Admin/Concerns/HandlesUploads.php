@@ -32,6 +32,26 @@ trait HandlesUploads
     }
 
     /**
+     * Store every uploaded file found under $field (a multi-file input like
+     * `gallery[]`) and return their public URL paths. Empty when none.
+     */
+    protected function storeUploads(Request $request, string $field, string $folder): array
+    {
+        $paths = [];
+
+        foreach ((array) $request->file($field, []) as $file) {
+            if (! $file) {
+                continue;
+            }
+            $path = $file->store("uploads/{$folder}", 'public');
+            $this->downscaleImage(Storage::disk('public')->path($path), $this->maxImageDimension);
+            $paths[] = '/storage/'.$path;
+        }
+
+        return $paths;
+    }
+
+    /**
      * Shrink an image file in place to fit within $maxDim on its longest edge,
      * preserving aspect ratio and PNG/WebP transparency. A no-op when GD is
      * missing, the file is not a supported raster image, or it already fits.

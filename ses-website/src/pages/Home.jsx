@@ -266,7 +266,15 @@ export default function Home() {
           <div className="mt-12">
             <Carousel ariaLabel="featured solutions" auto speed={48}>
               {featuredSolutions.map((f) => (
-                <ProductTile key={f.name} name={f.name} icon={f.icon} size="md" src={f.image || `/images/p-${slugify(f.name)}.jpg`} />
+                <ProductTile
+                  key={f.name}
+                  name={f.name}
+                  icon={f.icon}
+                  size="md"
+                  src={f.image || `/images/p-${slugify(f.name)}.jpg`}
+                  to={`/featured/${slugify(f.name)}`}
+                  ctaLabel="View Details"
+                />
               ))}
             </Carousel>
           </div>

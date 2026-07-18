@@ -9,9 +9,18 @@ class FeaturedProduct extends Model
 {
     protected $fillable = [
         'product_category_id', 'name', 'spec', 'icon', 'image', 'sort_order', 'is_active',
+        'overview', 'highlights', 'gallery', 'diagram_image', 'diagram_caption',
+        'tech_features', 'dimensions', 'materials',
     ];
 
-    protected $casts = ['is_active' => 'boolean'];
+    protected $casts = [
+        'is_active' => 'boolean',
+        'highlights' => 'array',
+        'gallery' => 'array',
+        'tech_features' => 'array',
+        'dimensions' => 'array',
+        'materials' => 'array',
+    ];
 
     public function category(): BelongsTo
     {
