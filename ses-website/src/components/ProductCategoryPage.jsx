@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Download, FileText, ShieldCheck, Headphones, Truck, MessageCircle, Search } from 'lucide-react'
+import { ArrowRight, Download, FileText, ShieldCheck, Headphones, Truck, Search } from 'lucide-react'
 import { triggerDownload } from '../utils/download'
 import PageHero from './PageHero'
 import SectionTitle from './SectionTitle'
@@ -195,19 +195,6 @@ export default function ProductCategoryPage({ category, data, slug }) {
           </div>
         </div>
       </section>
-
-      {/* Floating help button → opens WhatsApp chat */}
-      <a
-        href="https://wa.me/201003029064?text=Hi%20SES%2C%20I%27d%20like%20help%20choosing%20a%20product."
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-navy-900 py-3 pl-3 pr-4 text-sm font-semibold text-white shadow-card-hover transition-all hover:-translate-y-0.5 hover:bg-brand-royal"
-      >
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-orange">
-          <MessageCircle className="h-4 w-4" />
-        </span>
-        <span className="hidden sm:inline">Need Help? Chat with Us</span>
-      </a>
     </>
   )
 }
