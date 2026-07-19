@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="/images/logo-mark.png">
+    <link rel="apple-touch-icon" href="/images/logo-mark.png">
     <title>@yield('title', 'Admin') — SES Trading & Industries</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -21,6 +23,7 @@
         ['Dashboard', 'admin.dashboard', 'admin.dashboard'],
         ['Leads', 'admin.leads.index', 'admin.leads.*'],
         ['__HEADING__', 'Content', ''],
+        ['Products', 'admin.products.index', 'admin.products.*'],
         ['Projects', 'admin.projects.index', 'admin.projects.*'],
         ['Product Categories', 'admin.product-categories.index', 'admin.product-categories.*'],
         ['Product Groups', 'admin.product-groups.index', 'admin.product-groups.*'],
@@ -38,9 +41,12 @@
     <div class="flex min-h-screen">
         {{-- Sidebar --}}
         <aside class="hidden w-64 shrink-0 flex-col bg-navy-900 text-white lg:flex">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-5 py-5 font-extrabold tracking-tight">
-                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-orange text-sm">SES</span>
-                <span>Admin <span class="block text-[10px] font-normal uppercase tracking-widest text-white/40">Control Panel</span></span>
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-5 py-5">
+                <img src="/images/logo-mark.png" alt="SES" class="h-10 w-10 shrink-0 object-contain">
+                <span class="flex flex-col leading-none">
+                    <span class="text-lg font-extrabold tracking-tight text-white">SES <span class="font-semibold text-white/50">Admin</span></span>
+                    <span class="mt-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white/40">Control Panel</span>
+                </span>
             </a>
             <nav class="flex-1 space-y-0.5 overflow-y-auto px-3 pb-6">
                 @foreach ($nav as $item)

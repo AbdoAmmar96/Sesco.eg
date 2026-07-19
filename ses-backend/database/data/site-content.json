@@ -3,11 +3,11 @@
     "name": "SES Trading & Industries",
     "shortName": "SES",
     "tagline": "Designed with Precision. Built for Protection.",
-    "intro": "Integrated engineering solutions for Fire Fighting, Fire Alarm, MEP, Water Networks, Testing, Commissioning and Maintenance across Egypt.",
+    "intro": "Integrated engineering solutions for Fire Fighting, Fire Alarm, MEP, Water Networks, Testing, Commissioning and Maintenance across the MENA region.",
     "address": "56/5 Forsan City, Qatameya, Cairo, Egypt",
     "phone": "+20 100 302 9064",
     "phoneHref": "tel:+201003029064",
-    "email": "mallamy@sescoeg.com",
+    "email": "sales@sescoeg.com",
     "website": "www.sescoeg.com",
     "websiteHref": "https://www.sescoeg.com",
     "hours": "Sun – Thu: 9:00 AM – 5:00 PM",
@@ -134,12 +134,6 @@
       "desc": "Complete plumbing solutions for commercial, industrial and residential buildings."
     },
     {
-      "slug": "drainage-sewage",
-      "name": "Drainage & Sewage Networks",
-      "icon": "pipe",
-      "desc": "Design and installation of drainage and sewage network systems."
-    },
-    {
       "slug": "pump-installation",
       "name": "Pump Installation",
       "icon": "pump",
@@ -203,7 +197,7 @@
     },
     {
       "value": "Across",
-      "label": "Egypt",
+      "label": "MENA",
       "icon": "mappin"
     }
   ],

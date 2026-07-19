@@ -53,6 +53,9 @@
                      hint="Caption shown under the diagram image." />
         </div>
 
+        {{-- Technical Drawings (structure / dimensions, labelled) --}}
+        @include('admin.partials._diagrams', ['diagrams' => $item->diagrams])
+
         {{-- Description --}}
         <div class="space-y-5 rounded-2xl border border-slate-200 bg-white p-6">
             <h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Description</h2>

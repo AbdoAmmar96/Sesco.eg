@@ -79,9 +79,15 @@ class ContentController extends Controller
                 'name' => $c->name, 'logo' => $this->media($c->logo),
             ]),
 
-            'featuredSolutions' => FeaturedProduct::whereNull('product_category_id')
-                ->where('is_active', true)->orderBy('sort_order')->get()
-                ->map(fn ($f) => $this->featured($f)),
+            // Home "Featured Solutions" — a curated selection drawn from the
+            // real category featured products (so it shows actual product
+            // photos and links straight to each product's detail page).
+            'featuredSolutions' => ProductCategory::where('is_active', true)
+                ->orderBy('sort_order')->get()
+                ->flatMap(fn ($c) => $c->featured()
+                    ->where('is_active', true)->orderBy('sort_order')->take(4)->get()
+                    ->map(fn ($f) => array_merge($this->featured($f), ['categorySlug' => $c->slug]))
+                )->values(),
 
             'fireFighting' => $this->categoryDetail('fire-fighting'),
             'fireAlarm' => $this->categoryDetail('fire-alarm'),
@@ -132,11 +138,25 @@ class ContentController extends Controller
                 'title' => $g->title,
                 'desc' => $g->description,
                 'cta' => $g->cta,
-                'items' => collect($g->items ?? [])->map(fn ($it) => [
+                // Card fields plus any datasheet sections stored on the item, so
+                // every product (not only featured ones) renders a full detail
+                // page. Null sections are dropped to keep the payload lean.
+                'items' => collect($g->items ?? [])->map(fn ($it) => array_filter([
                     'name' => $it['name'] ?? '',
                     'icon' => $it['icon'] ?? 'box',
                     'image' => $this->media($it['image'] ?? null),
-                ])->values(),
+                    'overview' => $it['overview'] ?? null,
+                    'highlights' => $it['highlights'] ?? null,
+                    'gallery' => isset($it['gallery'])
+                        ? collect($it['gallery'])->map(fn ($g) => $this->media($g))->filter()->values()
+                        : null,
+                    'diagramImage' => $this->media($it['diagramImage'] ?? null),
+                    'diagramCaption' => $it['diagramCaption'] ?? null,
+                    'diagrams' => isset($it['diagrams']) ? $this->diagrams($it['diagrams']) : null,
+                    'techFeatures' => $it['techFeatures'] ?? null,
+                    'dimensions' => $it['dimensions'] ?? null,
+                    'materials' => $it['materials'] ?? null,
+                ], fn ($v) => $v !== null))->values(),
             ]),
             'featured' => $cat->featured->map(fn ($f) => $this->featured($f)),
         ];
@@ -160,6 +180,7 @@ class ContentController extends Controller
             'gallery' => collect($f->gallery ?? [])->map(fn ($g) => $this->media($g))->filter()->values(),
             'diagramImage' => $this->media($f->diagram_image),
             'diagramCaption' => $f->diagram_caption,
+            'diagrams' => $this->diagrams($f->diagrams),
             'techFeatures' => $f->tech_features ?? [],
             'dimensions' => $f->dimensions,
             'materials' => $f->materials ?? [],
@@ -169,6 +190,20 @@ class ContentController extends Controller
     private function blocks($grouped, string $group, callable $map)
     {
         return ($grouped[$group] ?? collect())->map($map)->values();
+    }
+
+    /**
+     * Resolve a list of labelled technical drawings ({image, caption}),
+     * turning each stored image path into a loadable URL and dropping any
+     * entry without an image.
+     */
+    private function diagrams($list): array
+    {
+        return collect($list ?? [])
+            ->map(fn ($d) => ['image' => $this->media($d['image'] ?? null), 'caption' => $d['caption'] ?? null])
+            ->filter(fn ($d) => $d['image'])
+            ->values()
+            ->all();
     }
 
     /**

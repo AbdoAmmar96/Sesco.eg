@@ -272,7 +272,7 @@ export default function Home() {
                   icon={f.icon}
                   size="md"
                   src={f.image || `/images/p-${slugify(f.name)}.jpg`}
-                  to={`/featured/${slugify(f.name)}`}
+                  to={f.categorySlug ? `/products/${f.categorySlug}/${slugify(f.name)}` : `/featured/${slugify(f.name)}`}
                   ctaLabel="View Details"
                 />
               ))}

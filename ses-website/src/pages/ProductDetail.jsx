@@ -74,6 +74,15 @@ export default function ProductDetail() {
   const techFeatures = product.techFeatures || []
   const dimensions = product.dimensions || null
   const materials = product.materials || []
+  // Labelled technical drawings ([{image, caption}]). Falls back to the single
+  // diagramImage so older records still render.
+  const diagrams = (
+    product.diagrams?.length
+      ? product.diagrams
+      : product.diagramImage
+        ? [{ image: product.diagramImage, caption: product.diagramCaption }]
+        : []
+  ).filter((d) => d && d.image)
   const overview = product.overview || (product.spec && !contactMarker(product.spec) ? product.spec : '')
   const contactOnly = contactMarker(product.spec)
 
@@ -222,21 +231,34 @@ export default function ProductDetail() {
         </section>
       )}
 
-      {/* Cross-section / diagram */}
-      {product.diagramImage && (
+      {/* Technical drawings — structure / cross-section & dimensions */}
+      {diagrams.length > 0 && (
         <section className="section bg-surface">
-          <div className="container max-w-4xl text-center">
+          <div className="container max-w-5xl">
             <Reveal>
-              <img
-                src={product.diagramImage}
-                alt={product.diagramCaption || `${product.name} diagram`}
-                loading="lazy"
-                className="mx-auto max-h-[520px] w-full rounded-2xl border border-line bg-white object-contain p-4"
-              />
-              {product.diagramCaption && (
-                <p className="mt-4 text-sm font-medium text-navy-500">{product.diagramCaption}</p>
-              )}
+              <SectionTitle align="left" eyebrow="Technical Drawings" />
             </Reveal>
+            <div className={`mt-8 grid gap-6 ${diagrams.length > 1 ? 'md:grid-cols-2' : 'max-w-3xl mx-auto'}`}>
+              {diagrams.map((d, i) => (
+                <Reveal key={(d.image || '') + i} delay={(i % 2) * 80}>
+                  <figure className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white">
+                    <div className="flex flex-1 items-center justify-center p-4">
+                      <img
+                        src={d.image}
+                        alt={d.caption || `${product.name} drawing ${i + 1}`}
+                        loading="lazy"
+                        className="max-h-[460px] w-full object-contain"
+                      />
+                    </div>
+                    {d.caption && (
+                      <figcaption className="border-t border-line bg-navy-50 py-3 text-center text-sm font-semibold text-navy-700">
+                        {d.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       )}
@@ -359,7 +381,8 @@ function Gallery({ images, fallback, icon, name }) {
         icon={icon}
         label={name}
         tone="light"
-        className="aspect-square w-full"
+        className="aspect-square w-full bg-white"
+        imgClassName="object-contain p-4"
         rounded="rounded-2xl"
       />
       {list.length > 1 && (
@@ -374,7 +397,7 @@ function Gallery({ images, fallback, icon, name }) {
               }`}
               aria-label={`View image ${i + 1}`}
             >
-              <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+              <img src={src} alt="" loading="lazy" className="h-full w-full object-contain p-1" />
             </button>
           ))}
         </div>

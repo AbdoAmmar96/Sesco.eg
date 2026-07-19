@@ -63,6 +63,16 @@ class WebsiteProductsSeeder extends Seeder
                     'image' => $f['image'] ?? null,
                     'sort_order' => $i,
                     'is_active' => true,
+                    // Optional datasheet fields (rendered only when present).
+                    'overview' => $f['overview'] ?? null,
+                    'highlights' => $f['highlights'] ?? null,
+                    'gallery' => $f['gallery'] ?? null,
+                    'diagram_image' => $f['diagramImage'] ?? null,
+                    'diagram_caption' => $f['diagramCaption'] ?? null,
+                    'diagrams' => $f['diagrams'] ?? null,
+                    'tech_features' => $f['techFeatures'] ?? null,
+                    'dimensions' => $f['dimensions'] ?? null,
+                    'materials' => $f['materials'] ?? null,
                 ]);
             }
 

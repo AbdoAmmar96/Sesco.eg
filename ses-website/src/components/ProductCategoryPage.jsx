@@ -5,6 +5,7 @@ import { triggerDownload } from '../utils/download'
 import PageHero from './PageHero'
 import SectionTitle from './SectionTitle'
 import ProductTile from './ProductTile'
+import SmartImage from './SmartImage'
 import Carousel from './Carousel'
 import Reveal from './Reveal'
 import { slugify } from '../lib/utils'
@@ -30,6 +31,11 @@ export default function ProductCategoryPage({ category, data, slug }) {
   // Real PDF for this category (if any), used by the Download Catalog buttons.
   const catalogUrl = CATALOGS[slug] || '#'
   const catalogName = `SES ${category.name} Catalog.pdf`
+
+  // Fire Alarm is presented as a grid of manufacturer brand cards (Simplex /
+  // Apollo / Notifier) instead of the generic filter + groups layout.
+  const isBrandView = slug === 'fire-alarm'
+  const brandItems = (data.groups?.[0]?.items?.length ? data.groups[0].items : data.featured) || []
 
   const visibleGroups = useMemo(() => {
     let groups = data.groups.filter((g) => matchesFilter(g, active))
@@ -66,6 +72,47 @@ export default function ProductCategoryPage({ category, data, slug }) {
         }
       />
 
+      {/* Fire Alarm — manufacturer brand cards (site colours) */}
+      {isBrandView && (
+        <section className="section bg-white">
+          <div className="container">
+            <Reveal>
+              <h2 className="text-4xl font-extrabold tracking-tight text-navy-900 md:text-5xl">PRODUCTS</h2>
+            </Reveal>
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {brandItems.map((b, i) => (
+                <Reveal key={b.name} delay={(i % 3) * 90}>
+                  <Link
+                    to={`/products/${slug}/${slugify(b.name)}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-line bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-brand-royal hover:shadow-card-hover"
+                  >
+                    <div className="flex min-h-[240px] flex-1 items-center justify-center bg-white p-10">
+                      <SmartImage
+                        src={b.image}
+                        icon={b.icon || 'bell'}
+                        label={b.name}
+                        tone="light"
+                        className="h-28 w-full"
+                        imgClassName="object-contain"
+                        rounded="rounded-none"
+                      />
+                    </div>
+                    <div className="relative border-t border-line bg-navy-50 py-4 text-center">
+                      <span className="text-base font-bold text-navy-900 transition-colors group-hover:text-brand-orange">
+                        {b.name}
+                      </span>
+                      <span className="absolute inset-x-0 bottom-0 h-1 bg-brand-orange" />
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {!isBrandView && (
+        <>
       {/* Filters */}
       <div className="sticky top-[72px] z-30 border-b border-line bg-white/95 backdrop-blur">
         <div className="container flex items-center gap-3 py-4">
@@ -96,42 +143,57 @@ export default function ProductCategoryPage({ category, data, slug }) {
         </div>
       </div>
 
-      {/* Groups */}
+      {/* Groups — compact grouped cards in their original order. A catalogue
+          group (Ductile Iron Fittings) looks like the rest but shows a preview
+          and a "View all" link that opens its full catalogue page. */}
       <section className="section bg-surface">
         <div className="container">
           <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-            {visibleGroups.map((g, idx) => (
-              <Reveal key={g.title} delay={(idx % 3) * 80} className="h-full">
-                <div className="card card-hover flex h-full flex-col p-5">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-orange text-sm font-bold text-white">
-                      {g.n}
-                    </span>
-                    <h3 className="pt-1 text-base font-bold leading-tight text-navy-900">{g.title}</h3>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-navy-500">{g.desc}</p>
+            {visibleGroups.map((g, idx) => {
+              const isCatalog = g.title === 'Ductile Iron Fittings'
+              const shownItems = isCatalog ? g.items.slice(0, 6) : g.items
+              return (
+                <Reveal key={g.title} delay={(idx % 3) * 80} className="h-full">
+                  <div className="card card-hover flex h-full flex-col p-5">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-orange text-sm font-bold text-white">
+                        {g.n}
+                      </span>
+                      <h3 className="pt-1 text-base font-bold leading-tight text-navy-900">{g.title}</h3>
+                    </div>
+                    <p className="mt-3 text-sm leading-relaxed text-navy-500">{g.desc}</p>
 
-                  <div className="mt-4 grid grid-cols-3 gap-2.5">
-                    {g.items.map((it) => (
-                      <ProductTile
-                        key={it.name}
-                        name={it.name}
-                        icon={it.icon}
-                        src={it.image || `/images/p-${slugify(it.name)}.jpg`}
-                        to={`/products/${slug}/${slugify(it.name)}`}
-                      />
-                    ))}
-                  </div>
+                    <div className="mt-4 grid grid-cols-3 gap-2.5">
+                      {shownItems.map((it) => (
+                        <ProductTile
+                          key={it.name}
+                          name={it.name}
+                          icon={it.icon}
+                          src={it.image || `/images/p-${slugify(it.name)}.jpg`}
+                          to={`/products/${slug}/${slugify(it.name)}`}
+                        />
+                      ))}
+                    </div>
 
-                  <Link
-                    to="/contact"
-                    className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-orange transition-all hover:gap-2.5"
-                  >
-                    {g.cta} <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </Reveal>
-            ))}
+                    {isCatalog ? (
+                      <Link
+                        to={`/products/${slug}/group/${slugify(g.title)}`}
+                        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-orange transition-all hover:gap-2.5"
+                      >
+                        View all {g.items.length} fittings <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/contact"
+                        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-orange transition-all hover:gap-2.5"
+                      >
+                        {g.cta} <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    )}
+                  </div>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -158,6 +220,8 @@ export default function ProductCategoryPage({ category, data, slug }) {
           </div>
         </div>
       </section>
+        </>
+      )}
 
       {/* Catalog strip — slim bar (matches design) */}
       <section className="bg-surface before-footer pt-2">

@@ -38,6 +38,7 @@ class FeaturedProductController extends Controller
             $data['diagram_image'] = $path;
         }
         $data['gallery'] = $this->galleryPaths($request, []);
+        $data['diagrams'] = $this->diagramRows($request, 'featured');
         FeaturedProduct::create($data);
 
         return redirect()->route('admin.featured-products.index')->with('ok', 'Featured product created.');
@@ -58,6 +59,7 @@ class FeaturedProductController extends Controller
             $data['diagram_image'] = $path;
         }
         $data['gallery'] = $this->galleryPaths($request, $featuredProduct->gallery ?? []);
+        $data['diagrams'] = $this->diagramRows($request, 'featured');
         $featuredProduct->update($data);
 
         return redirect()->route('admin.featured-products.index')->with('ok', 'Featured product updated.');
@@ -86,6 +88,8 @@ class FeaturedProductController extends Controller
             'image' => ['nullable', 'image', 'max:12288'],
             'diagram_image' => ['nullable', 'image', 'max:12288'],
             'diagram_caption' => ['nullable', 'string', 'max:255'],
+            'diagrams.*.image' => ['nullable', 'image', 'max:12288'],
+            'diagrams.*.caption' => ['nullable', 'string', 'max:255'],
             'gallery.*' => ['nullable', 'image', 'max:12288'],
             'overview' => ['nullable', 'string', 'max:5000'],
             'highlights' => ['nullable', 'string', 'max:2000'],

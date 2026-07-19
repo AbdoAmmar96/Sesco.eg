@@ -9,6 +9,9 @@
         'name' => $it['name'] ?? '',
         'icon' => $it['icon'] ?? 'box',
         'image_current' => $it['image'] ?? '',
+        // Carry the item's datasheet fields (overview, techFeatures, dimensions,
+        // materials, diagrams…) so saving the group never wipes them.
+        'payload' => json_encode($it),
     ])->all());
 @endphp
 
@@ -59,7 +62,7 @@
 
     {{-- Blank row stamped out by the "Add item" button. --}}
     <template id="items-template">
-        @include('admin.product-groups._item-row', ['i' => '__INDEX__', 'row' => ['name' => '', 'icon' => '', 'image_current' => '']])
+        @include('admin.product-groups._item-row', ['i' => '__INDEX__', 'row' => ['name' => '', 'icon' => '', 'image_current' => '', 'payload' => '']])
     </template>
 @endsection
 

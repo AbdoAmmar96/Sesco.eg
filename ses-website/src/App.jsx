@@ -6,6 +6,7 @@ import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Products from './pages/Products'
 import CategoryDetail from './pages/CategoryDetail'
+import GroupCatalog from './pages/GroupCatalog'
 import ProductDetail from './pages/ProductDetail'
 import Projects from './pages/Projects'
 import Downloads from './pages/Downloads'
@@ -23,6 +24,8 @@ export default function App() {
         <Route path="/services/:slug" element={<ServiceDetail />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<CategoryDetail />} />
+        {/* Full catalogue view for one group (static "group" segment ranks above :product). */}
+        <Route path="/products/:slug/group/:groupSlug" element={<GroupCatalog />} />
         <Route path="/products/:slug/:product" element={<ProductDetail />} />
         {/* Home "Featured Solutions" (no category) get their own detail page. */}
         <Route path="/featured/:product" element={<ProductDetail />} />

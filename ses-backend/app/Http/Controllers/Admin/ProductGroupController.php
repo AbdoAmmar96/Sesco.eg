@@ -87,6 +87,10 @@ class ProductGroupController extends Controller
      * Build the items JSON from the repeater rows. A row keeps its existing
      * image unless a new file is uploaded for it; rows left unnamed are
      * dropped, which is how the form deletes an item.
+     *
+     * The hidden `payload` field carries the item's full datasheet (overview,
+     * techFeatures, dimensions, materials, diagrams…) so those sections — edited
+     * on the dedicated Products screen — are never wiped by a group save.
      */
     private function itemRows(Request $request): array
     {
@@ -98,12 +102,15 @@ class ProductGroupController extends Controller
                 continue;
             }
 
-            $rows[] = [
-                'name' => $name,
-                'icon' => trim((string) ($row['icon'] ?? '')) ?: 'box',
-                'image' => $this->storeUpload($request, "items.{$i}.image", 'groups')
-                    ?: (trim((string) ($row['image_current'] ?? '')) ?: null),
-            ];
+            $base = json_decode((string) ($row['payload'] ?? ''), true);
+            $base = is_array($base) ? $base : [];
+
+            $base['name'] = $name;
+            $base['icon'] = trim((string) ($row['icon'] ?? '')) ?: 'box';
+            $base['image'] = $this->storeUpload($request, "items.{$i}.image", 'groups')
+                ?: (trim((string) ($row['image_current'] ?? '')) ?: null);
+
+            $rows[] = $base;
         }
 
         return $rows;

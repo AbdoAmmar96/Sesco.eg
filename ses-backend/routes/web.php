@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FeaturedProductController;
 use App\Http\Controllers\Admin\LeadAdminController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductGroupController;
+use App\Http\Controllers\Admin\ProductItemController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
@@ -32,6 +33,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('leads/{lead}', [LeadAdminController::class, 'show'])->name('leads.show');
         Route::patch('leads/{lead}/status', [LeadAdminController::class, 'updateStatus'])->name('leads.status');
         Route::delete('leads/{lead}', [LeadAdminController::class, 'destroy'])->name('leads.destroy');
+
+        // Products — every catalogue item's full data, image, icon & datasheet.
+        Route::get('products', [ProductItemController::class, 'index'])->name('products.index');
+        Route::get('products/create', [ProductItemController::class, 'create'])->name('products.create');
+        Route::post('products', [ProductItemController::class, 'store'])->name('products.store');
+        Route::get('products/{productGroup}/{index}/edit', [ProductItemController::class, 'edit'])->name('products.edit');
+        Route::put('products/{productGroup}/{index}', [ProductItemController::class, 'update'])->name('products.update');
 
         // Content resources
         Route::resource('projects', ProjectController::class)->except('show');

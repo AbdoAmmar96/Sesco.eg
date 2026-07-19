@@ -15,7 +15,11 @@ return [
         'https://www.sescoeg.com',
     ],
 
-    'allowed_origins_patterns' => [],
+    // Any local dev origin — localhost / 127.0.0.1 on any port (Vite picks
+    // 5173, 5174, 5175… depending on what's free), over http or https.
+    'allowed_origins_patterns' => [
+        '#^https?://(localhost|127\.0\.0\.1)(:\d+)?$#',
+    ],
 
     'allowed_headers' => ['*'],
 

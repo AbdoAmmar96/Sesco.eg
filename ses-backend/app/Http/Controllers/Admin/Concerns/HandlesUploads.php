@@ -32,6 +32,33 @@ trait HandlesUploads
     }
 
     /**
+     * Build the diagrams list ([{image, caption}, ...]) from a repeater whose
+     * rows are `diagrams[i][caption]`, `diagrams[i][image]` (new upload) and
+     * `diagrams[i][image_current]` (existing path kept when no new file).
+     * Rows with no image are dropped.
+     */
+    protected function diagramRows(Request $request, string $folder): array
+    {
+        $out = [];
+
+        foreach ((array) $request->input('diagrams', []) as $i => $row) {
+            $image = $this->storeUpload($request, "diagrams.{$i}.image", $folder)
+                ?: (trim((string) ($row['image_current'] ?? '')) ?: null);
+
+            if (! $image) {
+                continue;
+            }
+
+            $out[] = [
+                'image' => $image,
+                'caption' => trim((string) ($row['caption'] ?? '')) ?: null,
+            ];
+        }
+
+        return $out;
+    }
+
+    /**
      * Store every uploaded file found under $field (a multi-file input like
      * `gallery[]`) and return their public URL paths. Empty when none.
      */

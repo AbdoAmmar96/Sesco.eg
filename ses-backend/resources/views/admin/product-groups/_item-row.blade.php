@@ -18,7 +18,18 @@
                 <input type="file" name="items[{{ $i }}][image]" accept="image/*"
                        class="block w-full text-xs text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-navy-900 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-navy-800">
                 <input type="hidden" name="items[{{ $i }}][image_current]" value="{{ $row['image_current'] ?? '' }}">
+                <input type="hidden" name="items[{{ $i }}][payload]" value="{{ $row['payload'] ?? '' }}">
             </div>
+
+            @php($ds = json_decode($row['payload'] ?? '', true))
+            @if (is_array($ds) && (($ds['overview'] ?? null) || !empty($ds['techFeatures']) || !empty($ds['diagrams'])))
+                <div class="sm:col-span-2 flex flex-wrap items-center gap-2 text-[11px]">
+                    <span class="rounded bg-green-100 px-1.5 py-0.5 font-semibold text-green-700">datasheet ✓</span>
+                    @if (!empty($ds['techFeatures']))<span class="text-slate-400">{{ count($ds['techFeatures']) }} specs</span>@endif
+                    @if (!empty($ds['diagrams']))<span class="text-slate-400">· {{ count($ds['diagrams']) }} drawings</span>@endif
+                    <span class="text-slate-300">— edit full data in Products</span>
+                </div>
+            @endif
         </div>
 
         <button type="button" title="Remove item"

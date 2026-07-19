@@ -8,11 +8,11 @@ export const company = {
   shortName: 'SES',
   tagline: 'Designed with Precision. Built for Protection.',
   intro:
-    'Integrated engineering solutions for Fire Fighting, Fire Alarm, MEP, Water Networks, Testing, Commissioning and Maintenance across Egypt.',
+    'Integrated engineering solutions for Fire Fighting, Fire Alarm, MEP, Water Networks, Testing, Commissioning and Maintenance across the MENA region.',
   address: '56/5 Forsan City, Qatameya, Cairo, Egypt',
   phone: '+20 100 302 9064',
   phoneHref: 'tel:+201003029064',
-  email: 'sales@sesco.eg.com',
+  email: 'sales@sescoeg.com',
   website: 'www.sescoeg.com',
   websiteHref: 'https://www.sescoeg.com',
   hours: 'Sun – Thu: 9:00 AM – 5:00 PM',
@@ -103,12 +103,6 @@ export const services = [
     name: 'Plumbing Systems',
     icon: 'droplet',
     desc: 'Complete plumbing solutions for commercial, industrial and residential buildings.',
-  },
-  {
-    slug: 'drainage-sewage',
-    name: 'Drainage & Sewage Networks',
-    icon: 'pipe',
-    desc: 'Design and installation of drainage and sewage network systems.',
   },
   {
     slug: 'pump-installation',
@@ -322,7 +316,7 @@ export const aboutStats = [
   { value: '10+', label: 'Years of Experience', icon: 'users' },
   { value: '100+', label: 'Projects Completed', icon: 'building' },
   { value: '60+', label: 'Skilled Engineers', icon: 'hardhat' },
-  { value: 'Across', label: 'Egypt', icon: 'mappin' },
+  { value: 'Across', label: 'MENA', icon: 'mappin' },
 ]
 
 export const projectStats = [
@@ -460,17 +454,17 @@ export const certifications = [
 ]
 
 // ---- Featured solutions (home) ----
+// Drawn from the real category featured products so the Home carousel shows
+// actual product photos and links straight to each product's detail page.
 export const featuredSolutions = [
-  { name: 'Fire Pump Set', icon: 'pump' },
-  { name: 'Fire Hose Cabinet', icon: 'cabinet' },
-  { name: 'Sprinkler Head', icon: 'sprinkler' },
-  { name: 'Smoke Detector', icon: 'detector' },
-  { name: 'Manual Call Point', icon: 'panel' },
-  { name: 'Addressable Control Panel', icon: 'panel' },
-  { name: 'Gate Valve', icon: 'valve' },
-  { name: 'Flange Adaptor', icon: 'coupling' },
-  { name: 'HDPE Pipe', icon: 'pipe' },
-  { name: 'Repair Clamp', icon: 'clamp' },
+  { name: 'Upright sprinkler', icon: 'sprinkler', image: '/images/p-upright-sprinkler.jpg', categorySlug: 'fire-fighting' },
+  { name: 'OS&Y Valve Flanged', icon: 'coupling', image: '/images/p-osy-valve-flanged.jpg', categorySlug: 'fire-fighting' },
+  { name: 'dry barrel hydrant', icon: 'hydrant', image: '/images/p-dry-barrel-hydrant.jpg', categorySlug: 'fire-fighting' },
+  { name: 'FM-200', icon: 'spray', image: '/images/p-fm-200.jpg', categorySlug: 'fire-fighting' },
+  { name: 'Fire Alarm System', icon: 'bell', image: '/images/brands/apollo.png', categorySlug: 'fire-alarm' },
+  { name: 'Check Valve', icon: 'valve', image: '/images/p-check-valve.jpg', categorySlug: 'water-network' },
+  { name: 'Manhole Cover', icon: 'cover', image: '/images/p-manhole-cover.jpg', categorySlug: 'water-network' },
+  { name: 'Ductile Iron Fitting', icon: 'coupling', image: '/images/p-ductile-iron-fitting.jpg', categorySlug: 'water-network' },
 ]
 
 // ---- How we work (process steps, shown on Home) ----
@@ -613,179 +607,72 @@ export const fireFighting = {
 }
 
 export const fireAlarm = {
-  filters: ['All Categories', 'Panels', 'Detectors', 'Notification', 'Modules', 'Cables', 'Power'],
-  highlights: ['Life Safety First', 'Reliable & Certified', 'Easy to Install & Maintain', 'Suitable for All Applications'],
+  filters: ['All Products'],
+  highlights: ['Life Safety First', 'Reliable & Certified', 'Leading Global Brands', 'Easy to Install & Maintain'],
   groups: [
     {
       n: 1,
-      title: 'Conventional Fire Alarm Systems',
-      desc: 'Cost-effective and easy to install systems ideal for small to mid-size buildings and applications.',
-      cta: 'View All Conventional Systems',
+      title: 'Fire Alarm Brands',
+      desc: 'Certified fire detection & alarm systems from the leading global manufacturers we supply and install.',
+      cta: 'Request a Quotation',
       items: [
-        { name: 'Conventional Fire Alarm Panel', icon: 'panel' },
-        { name: '4 Zone Control Panel', icon: 'panel' },
-        { name: '8 Zone Control Panel', icon: 'panel' },
-        { name: 'Fire Alarm Annunciator', icon: 'panel' },
-      ],
-    },
-    {
-      n: 2,
-      title: 'Addressable Fire Alarm Systems',
-      desc: 'Advanced intelligent systems with precise device identification and superior reliability.',
-      cta: 'View All Addressable Systems',
-      items: [
-        { name: 'Addressable Fire Alarm Panel', icon: 'panel' },
-        { name: 'Intelligent Control Panel', icon: 'panel' },
-        { name: 'Networked Fire Panel', icon: 'panel' },
-        { name: 'Loop Expander Module', icon: 'module' },
-      ],
-    },
-    {
-      n: 3,
-      title: 'Detection Devices',
-      desc: 'Wide range of detectors for early fire detection and hazardous condition monitoring.',
-      cta: 'View All Detection Devices',
-      items: [
-        { name: 'Smoke Detectors', icon: 'detector' },
-        { name: 'Heat Detectors', icon: 'detector' },
-        { name: 'Beam Detectors', icon: 'detector' },
-        { name: 'Gas Detectors', icon: 'detector' },
-      ],
-    },
-    {
-      n: 4,
-      title: 'Notification Devices',
-      desc: 'Audible and visual notification devices for effective alerts and evacuation.',
-      cta: 'View All Notification Devices',
-      items: [
-        { name: 'Manual Call Points', icon: 'panel' },
-        { name: 'Sounders', icon: 'speaker' },
-        { name: 'Sounder Strobes', icon: 'speaker' },
-        { name: 'Bells', icon: 'bell' },
-        { name: 'Flashers & Beacons', icon: 'beacon' },
-      ],
-    },
-    {
-      n: 5,
-      title: 'Modules, Interfaces & Accessories',
-      desc: 'Enhance system functionality with addressable modules, interfaces, and essential accessories.',
-      cta: 'View All Modules & Accessories',
-      items: [
-        { name: 'Input/Output Modules', icon: 'module' },
-        { name: 'Isolator Modules', icon: 'module' },
-        { name: 'Monitor Modules', icon: 'module' },
-        { name: 'Repeater Panel', icon: 'panel' },
-        { name: 'Accessories', icon: 'tools' },
-      ],
-    },
-    {
-      n: 6,
-      title: 'Cables, Batteries & Power Supplies',
-      desc: 'High-quality cables and reliable power solutions for continuous system performance.',
-      cta: 'View All Cables & Power Solutions',
-      items: [
-        { name: 'Fire Alarm Cables', icon: 'cable' },
-        { name: 'Power Supply Units', icon: 'battery' },
-        { name: 'Batteries', icon: 'battery' },
-        { name: 'Battery Chargers', icon: 'battery' },
+        { name: 'Simplex', icon: 'bell', image: '/images/brands/simplex.png' },
+        { name: 'Apollo', icon: 'bell', image: '/images/brands/apollo.png' },
+        { name: 'Notifier', icon: 'bell', image: '/images/brands/notifier.png' },
       ],
     },
   ],
   featured: [
-    { name: 'Addressable Fire Alarm Panel', spec: '2 Loop, LCD Display, EN54 Certified', icon: 'panel' },
-    { name: 'Optical Smoke Detector', spec: 'High Sensitivity, EN54-7 Certified', icon: 'detector' },
-    { name: 'Manual Call Point (MCP)', spec: 'Resettable, EN54-11 Certified', icon: 'panel' },
-    { name: 'Sounder Strobe (Red)', spec: 'Wall Mount, EN54-3 Certified', icon: 'speaker' },
-    { name: 'Power Supply Unit 24V 5A', spec: 'Switch Mode PSU, EN54-4 Certified', icon: 'battery' },
-    { name: 'Fire Alarm Cable 2x1.5mm²', spec: 'Shielded, FR, EN60286 Certified', icon: 'cable' },
+    { name: 'Simplex', spec: 'Fire Detection & Alarm Systems', icon: 'bell', image: '/images/brands/simplex.png' },
+    { name: 'Apollo', spec: 'Fire Detection & Alarm Systems', icon: 'bell', image: '/images/brands/apollo.png' },
+    { name: 'Notifier', spec: 'Fire Detection & Alarm Systems', icon: 'bell', image: '/images/brands/notifier.png' },
   ],
 }
 
 export const waterNetwork = {
-  filters: ['All Categories', 'Valves', 'Pipes', 'Fittings', 'Couplings', 'Drainage', 'Pumps', 'Accessories'],
+  filters: ['All Products', 'Valves', 'Fittings', 'Covers'],
   groups: [
     {
       n: 1,
-      title: 'Water Valves',
-      desc: 'Reliable valves for isolation, control, and pressure management in water systems.',
-      cta: 'View All Water Valves',
+      title: 'Valves',
+      desc: 'Isolation, check, air release and special valves for water distribution and control.',
+      cta: 'Request a Quotation',
       items: [
-        { name: 'Gate Valves', icon: 'valve' },
-        { name: 'Butterfly Valves', icon: 'valve' },
-        { name: 'Check Valves', icon: 'valve' },
-        { name: 'Air Release Valves', icon: 'valve' },
+        { name: 'Gate Valve', icon: 'valve' },
+        { name: 'Swing Check Valve', icon: 'valve' },
+        { name: 'Wafer Check Valve', icon: 'valve' },
+        { name: 'Dual Plate Check Valve', icon: 'valve' },
+        { name: 'Double-Ball Air Release Valve', icon: 'gauge' },
+        { name: 'Float Valve', icon: 'valve' },
+        { name: 'Y-Strainer', icon: 'grid' },
+        { name: 'Basket Strainer', icon: 'grid' },
       ],
     },
     {
       n: 2,
-      title: 'Pipes & Fittings',
-      desc: 'Durable pipes and fittings for safe and efficient water distribution and infrastructure.',
-      cta: 'View All Pipes & Fittings',
+      title: 'Ductile Iron Fittings',
+      desc: 'Ductile iron pipe fittings for water and utility networks.',
+      cta: 'Request a Quotation',
       items: [
-        { name: 'DI Pipes', icon: 'pipe' },
-        { name: 'HDPE Pipes', icon: 'pipe' },
-        { name: 'Bends', icon: 'pipe' },
-        { name: 'Tees', icon: 'pipe' },
+        { name: 'Ductile Iron Fittings', icon: 'coupling' },
       ],
     },
     {
       n: 3,
-      title: 'Flange Adaptors, Couplings & Dismantling Joints',
-      desc: 'High-performance connection solutions for easy installation, alignment, and maintenance.',
-      cta: 'View All Adaptors & Couplings',
+      title: 'Manhole Covers',
+      desc: 'Ductile iron manhole covers and frames for infrastructure and drainage.',
+      cta: 'Request a Quotation',
       items: [
-        { name: 'Flange Adaptors', icon: 'coupling' },
-        { name: 'Dismantling Joints', icon: 'coupling' },
-        { name: 'Couplings', icon: 'coupling' },
-        { name: 'Mechanical Joints', icon: 'coupling' },
-      ],
-    },
-    {
-      n: 4,
-      title: 'Repair Clamps & Pipe Accessories',
-      desc: 'Repair and installation accessories for quick and reliable pipe maintenance and connections.',
-      cta: 'View All Accessories',
-      items: [
-        { name: 'Repair Clamps', icon: 'clamp' },
-        { name: 'Tapping Saddles', icon: 'clamp' },
-        { name: 'Service Saddles', icon: 'clamp' },
-        { name: 'Pipe Straps', icon: 'clamp' },
-      ],
-    },
-    {
-      n: 5,
-      title: 'Drainage, Sewage & Rainwater Products',
-      desc: 'Effective drainage and sewage solutions for surface water management and infrastructure.',
-      cta: 'View All Drainage Products',
-      items: [
-        { name: 'Drainage Channels', icon: 'pipe' },
-        { name: 'Gratings', icon: 'grid' },
         { name: 'Manhole Covers', icon: 'cover' },
-        { name: 'Inspection Chambers', icon: 'cover' },
-      ],
-    },
-    {
-      n: 6,
-      title: 'Water Pumps & Network Accessories',
-      desc: 'High-efficiency pumps and accessories for water supply, pressure, and flow control.',
-      cta: 'View All Pumps & Accessories',
-      items: [
-        { name: 'Booster Pumps', icon: 'pump' },
-        { name: 'Transfer Pumps', icon: 'pump' },
-        { name: 'Pressure Tanks', icon: 'tank' },
-        { name: 'Water Meters', icon: 'gauge' },
       ],
     },
   ],
   featured: [
     { name: 'Gate Valve', spec: 'DI Flanged', icon: 'valve' },
-    { name: 'Butterfly Valve', spec: 'Wafer Type', icon: 'valve' },
-    { name: 'DI Pipe', spec: 'Class K9', icon: 'pipe' },
-    { name: 'Flange Adaptor', spec: 'Double Flanged', icon: 'coupling' },
-    { name: 'Dismantling Joint', spec: 'PN16', icon: 'coupling' },
-    { name: 'Repair Clamp', spec: 'Wide Range', icon: 'clamp' },
-    { name: 'Drainage Channel', spec: 'Heavy Duty', icon: 'pipe' },
-    { name: 'Booster Pump Set', spec: 'Variable Speed', icon: 'pump' },
+    { name: 'Swing Check Valve', spec: 'DI Flanged', icon: 'valve' },
+    { name: 'Double-Ball Air Release Valve', spec: 'PN16', icon: 'gauge' },
+    { name: 'Ductile Iron Fitting', spec: 'Water Network', icon: 'coupling' },
+    { name: 'Manhole Cover', spec: 'Ductile Iron', icon: 'cover' },
   ],
 }
 

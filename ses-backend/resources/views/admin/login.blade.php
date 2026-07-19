@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/logo-mark.png">
     <title>Admin Login — SES Trading & Industries</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,9 +15,9 @@
 <body class="flex min-h-screen items-center justify-center bg-navy-950 px-4">
     <div class="w-full max-w-sm">
         <div class="mb-6 text-center">
-            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange text-lg font-extrabold text-white">SES</span>
-            <h1 class="mt-4 text-xl font-bold text-white">Admin Panel</h1>
-            <p class="mt-1 text-sm text-white/50">SES Trading &amp; Industries — Leads</p>
+            <img src="/images/logo-mark.png" alt="SES" class="mx-auto h-16 w-16 object-contain">
+            <h1 class="mt-4 text-xl font-bold text-white">SES Admin Panel</h1>
+            <p class="mt-1 text-sm text-white/50">SES Trading &amp; Industries</p>
         </div>
 
         <form method="POST" action="{{ route('admin.login.attempt') }}" class="rounded-2xl bg-white p-6 shadow-xl">

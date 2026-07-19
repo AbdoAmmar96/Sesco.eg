@@ -29,7 +29,8 @@ export default function ProductTile({ name, spec, icon = 'box', src, size = 'sm'
           icon={icon}
           label={name}
           tone="light"
-          className="aspect-square w-full"
+          className="aspect-square w-full bg-white"
+          imgClassName="object-contain p-2"
           rounded="rounded-lg"
         />
         <div className="mt-3 flex flex-1 flex-col px-1">
@@ -55,7 +56,8 @@ export default function ProductTile({ name, spec, icon = 'box', src, size = 'sm'
         icon={icon}
         label=""
         tone="light"
-        className="aspect-square w-full"
+        className="aspect-square w-full bg-white"
+        imgClassName="object-contain p-1.5"
         rounded="rounded-md"
       />
       <p className="mt-2 text-[11px] font-semibold leading-tight text-navy-700">{name}</p>
